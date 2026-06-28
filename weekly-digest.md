@@ -25,6 +25,26 @@ Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#joint-jax-
 
 ---
 
+## Week of 2026-06-28
+
+_Quiet curated week (no new shares in the paper channels); both entries are from the weekly discovered-pass scan._
+
+1. **Modeling cis-regulatory variation in human brain enhancers across a large Parkinson's Disease cohort** (first: Sigalova; senior: Aerts; *bioRxiv* 2026.03.15.711881, v2 2026).
+   - **190 human donors (115 control, 75 Parkinson's):** long-read whole-genome sequencing + single-nucleus multiome of **anterior cingulate cortex and substantia nigra**.
+   - **Cell-type-aware sequence-to-function deep-learning** predicts chromatin accessibility, then **scores how variants perturb enhancer activity** in each brain cell type.
+   - Nominates **53,841 high-confidence cis-acting variants** that modulate **cell-type-specific enhancer accessibility**.
+   - Closest external template for the **brain-cell-type MPRA atlas + MPAC**: the same "**predict accessibility, then score the variant**" logic, run in disease-relevant brain regions.
+   - Direct hook for the lab's **PD / immune MPRA** thread — an orthogonal, model-based prioritization of Parkinson's regulatory variants to cross against MPRA allelic skews.
+   https://www.biorxiv.org/content/10.64898/2026.03.15.711881v2
+
+2. **BlueSTARR — deep-learning models of gene-regulatory perturbations from whole-genome reporter assays** (first: Majoros; senior: Reddy; *bioRxiv* 2026.03.27.714770, March 31 2026).
+   - **BlueSTARR** is a retrainable framework trained on **whole-genome STARR-seq** (two cell lines + one drug treatment) to **prioritize variants never directly assayed**.
+   - Turns a genome-scale reporter assay into a **variant-effect predictor** — the **train-on-reporter-data-then-predict** logic that underlies **MPAC**.
+   - Recovers a genome-wide signature of **purifying selection against both loss- and gain-of-function** regulatory variants.
+   - The **gain-of-function** signal is biased toward selection against **new cis-regulatory activity in closed chromatin proximal to genes** — i.e. the genome resists switching quiet regions on.
+   - Supplies a **selection-aware prior** for ranking extreme-effect regulatory variants, complementing FLARE and the complex-trait-tails work digested last week.
+   https://www.biorxiv.org/content/10.64898/2026.03.27.714770v1
+
 ## Week of 2026-06-24
 
 1. **FLARE — common vs. rare noncoding variant effects across cellular contexts** (first: Marderstein;
