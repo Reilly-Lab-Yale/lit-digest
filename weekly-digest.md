@@ -36,7 +36,7 @@ _Quiet curated week (no new shares in the paper channels); both entries are from
    - Closest external template for the **brain-cell-type MPRA atlas + MPAC**: the same "**predict accessibility, then score the variant**" logic, run in disease-relevant brain regions.
    - Direct hook for the lab's **PD / immune MPRA** thread — an orthogonal, model-based prioritization of Parkinson's regulatory variants to cross against MPRA allelic skews.
    https://www.biorxiv.org/content/10.64898/2026.03.15.711881v2
-   ![fig](https://www.biorxiv.org/content/biorxiv/early/2026/03/19/2026.03.15.711881/F1.large.jpg)
+   ![fig](https://www.biorxiv.org/content/biorxiv/early/2026/04/16/2026.03.15.711881/F1.large.jpg)
 
 2. **BlueSTARR — deep-learning models of gene-regulatory perturbations from whole-genome reporter assays** (first: Majoros; senior: Reddy; *bioRxiv* 2026.03.27.714770, March 31 2026).
    - **BlueSTARR** is a retrainable framework trained on **whole-genome STARR-seq** (two cell lines + one drug treatment) to **prioritize variants never directly assayed**.
