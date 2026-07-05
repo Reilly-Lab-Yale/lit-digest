@@ -25,6 +25,24 @@ Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#joint-jax-
 
 ---
 
+## Week of 2026-07-05
+
+1. **Somatic cancer variants enriched in Alzheimer's disease microglia-like cells drive inflammatory and proliferative states** (first: Huang; senior: Walsh; *Cell*, 2026).
+   - **Classic cancer-driver somatic mutations accumulate in microglia** in Alzheimer's disease brains, without producing cancer.
+   - Mutant microglial clones are **selected for survival and proliferation**, creating a persistent **inflammatory niche**.
+   - The resulting chronic inflammation plausibly **kills neighboring "bystander" neurons**, linking clonal somatic selection to neurodegeneration.
+   - Extends the somatic-mosaicism-as-disease-driver logic from neurons to **glia** — directly adjacent to the lab's own somatic-mosaicism work.
+   Shared `#interesting_papers`.
+   https://www.cell.com/cell/fulltext/S0092-8674(26)00341-7
+
+2. **ATLAS — population-level disease locus discovery via differential attention in genomic language models** (first: unknown; senior: unknown; *bioRxiv* 2026.02.09.704696, February 2026).
+   - Compares **attention patterns from a pretrained genomic language model** between disease and control cohorts to localize disease loci **without variant calling or supervised training**.
+   - Gene-level differential attention prioritizes candidates; a base-level pass **localizes signal to single-haplotype resolution**.
+   - Validated on synthetic data and a **β-thalassemia cohort**; recovers known loci with **higher recall than GWAS** at low allele frequencies (down to 10%) and small cohort sizes (<200/group).
+   - An unsupervised alternative to MPAC-style variant-effect prediction, worth tracking for rare-variant/small-cohort settings.
+   Shared `#interesting_papers`.
+   https://www.biorxiv.org/content/10.64898/2026.02.09.704696v1
+
 ## Week of 2026-06-28
 
 _Quiet curated week (no new shares in the paper channels); both entries are from the weekly discovered-pass scan._
