@@ -3,7 +3,7 @@
 A weekly scan of new and exciting papers, synthesized for your easy digestion. Just drop a paper in
 slack or email it to me as a suggestion and it will get in here.
 
-Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#joint-jax-yale` `#longevity-consortium` `#talks`
+Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#joint-jax-yale` `#longevity-consortium` `#talks` `#xspecies-modeling`
 
 ---
 
@@ -24,6 +24,25 @@ Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#joint-jax-
    ![fig](https://news.yale.edu/sites/default/files/styles/opengraph_image/public/2026-06/YN_world-map-genome-pacific.jpg?h=b1877eb9&itok=BwVxBfsQ)
 
 ---
+
+## Week of 2026-07-13
+
+1. **Immune context unmasks regulatory effects of Neanderthal and Denisovan introgression** (first: unknown; senior: unknown; *bioRxiv* 2026.05.29.727880, 2026).
+   - An **MPRA of archaic-introgressed variants** (Neanderthal + Denisovan) testing allele-specific regulatory activity of introgressed sequence.
+   - Central claim in the title: an **immune / activated cell context "unmasks" regulatory effects** that are invisible at baseline — many archaic alleles are regulatory **only in a stimulated state**.
+   - Implication: **context-dependent** reporter assays recover **adaptive-introgression regulatory function** that resting-state MPRA misses — a design lesson for the lab's own introgression + single-cell MPRA work.
+   - Surfaced while auditing papers affected by the **mpraflow / MPRAnalyze** bug, so worth reading with that caveat in mind.
+   - ⚠ First/senior authors unresolved this run (v1 not yet indexed; no browser to render the bioRxiv page) — verify before citing.
+   Shared `#interesting-papers_evolution`.
+   https://www.biorxiv.org/content/10.64898/2026.05.29.727880v1
+
+2. **Genome-wide absolute quantification of chromatin looping** (first: Jusuf; senior: Hansen; *Nature Structural & Molecular Biology*, 2026).
+   - **Calibrates Micro-C against live-imaging** to convert contact frequencies into **absolute looping probabilities** across 65,929 loops genome-wide.
+   - Loops are **rare**: mean pairwise looping probability **~1.2%**, maximum **~25%** — the looped state is the exception, not the rule.
+   - **CTCF–CTCF loops (~2.2%) are stronger than cis-regulatory loops (<1%)**, reframing enhancer–promoter "loops" as **transient, low-probability** contacts.
+   - A useful quantitative prior for **3D-genome / cross-species modeling** (why it was flagged in `#xspecies-modeling`).
+   Shared `#xspecies-modeling`.
+   https://www.nature.com/articles/s41594-026-01819-2
 
 ## Week of 2026-07-05
 
