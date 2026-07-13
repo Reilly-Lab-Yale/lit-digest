@@ -9,7 +9,17 @@ Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#joint-jax-
 
 ## 🎉 Hot off the press — from the Reilly Lab!
 
-1. **Long-term isolation and archaic introgression shape functional genetic variation in Near Oceania**
+1. **The Encyclopedia of DNA Elements** (first: ENCODE Project Consortium; senior: T. Reddy; *bioRxiv* 2026.07.06.731365, July 8 2026).
+   - ENCODE's **capstone reference map** of genome regulation â 20+ years distilled into **>16,000 genome-wide experiments**, predominantly in **primary cells and tissues**.
+   - Regulatory-element catalog anchored on **5.3 million DNase I hypersensitive sites** (essentially all accessible regulatory DNA), plus chromatin states, TF occupancy, nascent transcription, and **predicted functional consequences of non-coding variants**.
+   - Expanded gene catalog: **~18,000 novel human lncRNA genes, ~150,000 novel transcript isoforms**, and transcript-stability maps across cell types/time.
+   - Maps **regulatory-element ↔ gene interactions across >100 human tissues/cell lines at up to 10 bp resolution** (a vast loop-anchor network), plus parallel **mouse** developmental maps.
+   - **Reilly Lab contribution:** as an **ENCODE Functional Characterization Center** (with the Sabeti & Tewhey labs), the lab supplies **MPRA + non-coding CRISPR** functional testing of candidate elements — the "does it actually regulate?" layer behind the catalog. (Full consortium author list not enumerable this run; credited at lab level.)
+   👥 Reilly Lab: Steve Reilly
+   https://www.biorxiv.org/content/10.64898/2026.07.06.731365v1
+   ![fig](https://www.biorxiv.org/content/biorxiv/early/2026/07/08/2026.07.06.731365/F1.large.jpg)
+
+2. **Long-term isolation and archaic introgression shape functional genetic variation in Near Oceania**
    (first: P. Reilly; senior: S. Tucci; *Science* adr6749, June 11 2026).
    - **177 new high-coverage Near Oceanian genomes** across 12 populations, analyzed alongside 1,284
      worldwide genomes — a major fill of a long-underrepresented region.
@@ -43,6 +53,7 @@ Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#joint-jax-
    - A useful quantitative prior for **3D-genome / cross-species modeling** (why it was flagged in `#xspecies-modeling`).
    Shared `#xspecies-modeling`.
    https://www.nature.com/articles/s41594-026-01819-2
+   ![fig](https://media.springernature.com/m685/springer-static/image/art%3A10.1038%2Fs41594-026-01819-2/MediaObjects/41594_2026_1819_Fig1_HTML.png)
 
 ## Week of 2026-07-05
 
