@@ -18,6 +18,7 @@ Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#joint-jax-
    👥 Reilly Lab: Steve Reilly
    https://www.biorxiv.org/content/10.64898/2026.07.06.731365v1
    ![fig](https://www.biorxiv.org/content/biorxiv/early/2026/07/08/2026.07.06.731365/F1.large.jpg)
+   <!-- celebrated: 2026-07-13 -->
 
 2. **Long-term isolation and archaic introgression shape functional genetic variation in Near Oceania**
    (first: P. Reilly; senior: S. Tucci; *Science* adr6749, June 11 2026).
@@ -32,6 +33,7 @@ Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#joint-jax-
    👥 Reilly Lab: Steve Reilly, Jared Akers | alumni: Stephen Rong, Maggie Prentice
    https://www.science.org/doi/10.1126/science.adr6749
    ![fig](https://news.yale.edu/sites/default/files/styles/opengraph_image/public/2026-06/YN_world-map-genome-pacific.jpg?h=b1877eb9&itok=BwVxBfsQ)
+   <!-- celebrated: 2026-06-15 -->
 
 ---
 
@@ -62,19 +64,21 @@ Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#joint-jax-
    - Produces **base-level attribution maps** flagging candidate methylation-sensitive binding sites and TF-TF dependencies.
    - Discovered-pass hit against the sequence-to-function watch-topic — relevant to adding epigenetic context to `malinois-coda`/`mpac`-style CRE activity models to resolve cell-type-specific ambiguity.
    https://www.biorxiv.org/content/10.64898/2026.07.06.736502v1
+   ![fig](https://www.biorxiv.org/content/biorxiv/early/2026/07/08/2026.07.06.736502/F1.large.jpg)
 
 ---
 
 ## Week of 2026-07-13
 
-1. **Immune context unmasks regulatory effects of Neanderthal and Denisovan introgression** (first: unknown; senior: unknown; *bioRxiv* 2026.05.29.727880, 2026).
-   - An **MPRA of archaic-introgressed variants** (Neanderthal + Denisovan) testing allele-specific regulatory activity of introgressed sequence.
-   - Central claim in the title: an **immune / activated cell context "unmasks" regulatory effects** that are invisible at baseline — many archaic alleles are regulatory **only in a stimulated state**.
+1. **Immune context unmasks regulatory effects of Neanderthal and Denisovan introgression** (first: Li; senior: Rotival; *bioRxiv* 2026.05.29.727880, June 1 2026).
+   - An **MPRA of 4,161 introgressed variants** (Neanderthal + Denisovan) across three cell types, tested at baseline and under **immune/infectious stimulation**.
+   - Central claim: an **immune / activated cell context "unmasks" regulatory effects** invisible at baseline — 94 variants' effects are specifically revealed or modulated by stimulation.
+   - The strongest hit, **rs17713054-A** (linked to Neanderthal introgression and COVID-19 severity), boosts a TNF-α-responsive lung enhancer, upregulating **SLC6A20**.
    - Implication: **context-dependent** reporter assays recover **adaptive-introgression regulatory function** that resting-state MPRA misses — a design lesson for the lab's own introgression + single-cell MPRA work.
    - Surfaced while auditing papers affected by the **mpraflow / MPRAnalyze** bug, so worth reading with that caveat in mind.
-   - ⚠ First/senior authors unresolved this run (v1 not yet indexed; no browser to render the bioRxiv page) — verify before citing.
    Shared `#interesting-papers_evolution`.
    https://www.biorxiv.org/content/10.64898/2026.05.29.727880v1
+   ![fig](https://www.biorxiv.org/content/biorxiv/early/2026/06/01/2026.05.29.727880/F1.large.jpg)
 
 2. **Genome-wide absolute quantification of chromatin looping** (first: Jusuf; senior: Hansen; *Nature Structural & Molecular Biology*, 2026).
    - **Calibrates Micro-C against live-imaging** to convert contact frequencies into **absolute looping probabilities** across 65,929 loops genome-wide.
@@ -84,6 +88,8 @@ Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#joint-jax-
    Shared `#xspecies-modeling`.
    https://www.nature.com/articles/s41594-026-01819-2
    ![fig](https://media.springernature.com/m685/springer-static/image/art%3A10.1038%2Fs41594-026-01819-2/MediaObjects/41594_2026_1819_Fig1_HTML.png)
+
+---
 
 ## Week of 2026-07-05
 
@@ -95,13 +101,16 @@ Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#joint-jax-
    Shared `#interesting_papers`.
    https://www.cell.com/cell/fulltext/S0092-8674(26)00341-7
 
-2. **ATLAS — population-level disease locus discovery via differential attention in genomic language models** (first: unknown; senior: unknown; *bioRxiv* 2026.02.09.704696, February 2026).
+2. **ATLAS — population-level disease locus discovery via differential attention in genomic language models** (first: Liu; senior: Zhang; *bioRxiv* 2026.02.09.704696, February 10 2026).
    - Compares **attention patterns from a pretrained genomic language model** between disease and control cohorts to localize disease loci **without variant calling or supervised training**.
    - Gene-level differential attention prioritizes candidates; a base-level pass **localizes signal to single-haplotype resolution**.
    - Validated on synthetic data and a **β-thalassemia cohort**; recovers known loci with **higher recall than GWAS** at low allele frequencies (down to 10%) and small cohort sizes (<200/group).
    - An unsupervised alternative to MPAC-style variant-effect prediction, worth tracking for rare-variant/small-cohort settings.
    Shared `#interesting_papers`.
    https://www.biorxiv.org/content/10.64898/2026.02.09.704696v1
+   ![fig](https://www.biorxiv.org/content/biorxiv/early/2026/02/10/2026.02.09.704696/F1.large.jpg)
+
+---
 
 ## Week of 2026-06-28
 
@@ -124,6 +133,8 @@ _Quiet curated week (no new shares in the paper channels); both entries are from
    - Supplies a **selection-aware prior** for ranking extreme-effect regulatory variants, complementing FLARE and the complex-trait-tails work digested last week.
    https://www.biorxiv.org/content/10.64898/2026.03.27.714770v1
    ![fig](https://www.biorxiv.org/content/biorxiv/early/2026/03/31/2026.03.27.714770/F1.large.jpg)
+
+---
 
 ## Week of 2026-06-24
 
