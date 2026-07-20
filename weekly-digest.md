@@ -3,7 +3,7 @@
 A weekly scan of new and exciting papers, synthesized for your easy digestion. Just drop a paper in
 slack or email it to me as a suggestion and it will get in here.
 
-Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#joint-jax-yale` `#longevity-consortium` `#talks` `#xspecies-modeling`
+Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#joint-jax-yale` `#longevity-consortium` `#talks` `#xspecies-modeling` `#ukbb_crispri`
 
 ---
 
@@ -32,6 +32,36 @@ Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#joint-jax-
    👥 Reilly Lab: Steve Reilly, Jared Akers | alumni: Stephen Rong, Maggie Prentice
    https://www.science.org/doi/10.1126/science.adr6749
    ![fig](https://news.yale.edu/sites/default/files/styles/opengraph_image/public/2026-06/YN_world-map-genome-pacific.jpg?h=b1877eb9&itok=BwVxBfsQ)
+
+---
+
+## Week of 2026-07-20
+
+1. **An encyclopedia of human enhancer–gene regulatory interactions** (first: Gschwind; senior: Engreitz; *Nature*, July 15 2026).
+   - Builds **ENCODE-rE2G**, a predictive model of enhancer-gene regulation trained on the largest benchmark to date: **10,356 CRISPR-perturbation element-gene pairs**, **30,000+ fine-mapped eQTLs**, and **569 fine-mapped GWAS variant-to-gene links**.
+   - Applies the model genome-wide to build an **encyclopedia of >92 million enhancer-gene interactions** across **1,458 biosamples / 369 cell types and tissues**.
+   - Beyond enhancer activity and 3D contact frequency, **promoter class and enhancer-enhancer synergy** turn out to matter for whether an enhancer actually drives its target gene.
+   - Not a Reilly-authored paper, but a direct ENCODE4 companion resource to last week's ENCODE flagship — the Reilly Lab's own MPRA/CRISPRi perturbation data (as an ENCODE FCC) is the same kind of data this model is trained and benchmarked on.
+   - Shared independently in two channels by Thanh-Thanh Nguyen ("this is out!").
+   Shared `#interesting_papers` `#ukbb_crispri`.
+   https://www.nature.com/articles/s41586-026-10781-4
+   ![fig](https://media.springernature.com/m685/springer-static/image/art%3A10.1038%2Fs41586-026-10781-4/MediaObjects/41586_2026_10781_Fig1_HTML.png)
+
+2. **Intrinsic promoter responsiveness dictates sensitivity to transcriptional activation by enhancers** (first: Tan; senior: Engreitz; *bioRxiv* 2026.06.25.734173, June 26 2026).
+   - Compares **six reporter-assay designs** across **25,000 enhancer-promoter pairs**, finding that assay architecture itself biases measured enhancer-promoter "compatibility."
+   - After removing those confounders, promoters differ **>100-fold** in intrinsic responsiveness to enhancer activation, while enhancers activate all promoters in a **similar rank order**.
+   - Promoter output scales with enhancer activity via a **power law with a promoter-specific exponent**, modulated by core-promoter TF motifs — adding this exponent to the Activity-by-Contact model improves prediction of which genes are "skipped" by enhancers.
+   - Flags a specific confound directly relevant to our own MPRA constructs: **upstream reporter designs can let the CRE initiate its own transcription** instead of the intended promoter, contaminating the measured signal — Grace Oualline and Mackenzie Noon cross-checked this against Reilly-Tewhey MPRA data and found the signal "seemed overwhelmingly promoter-like."
+   Shared `#interesting_papers`.
+   https://www.biorxiv.org/content/10.64898/2026.06.25.734173v1
+   ![fig](https://www.biorxiv.org/content/biorxiv/early/2026/06/26/2026.06.25.734173/F1.large.jpg)
+
+3. **EpiBinder: a multimodal framework for cell-type-specific prediction and interpretation of transcription factor binding** (first: Solozabal; senior: Afek; *bioRxiv* 2026.07.06.736502, July 6 2026).
+   - Adds **base-resolution DNA methylation + chromatin accessibility** as input modalities to a deep-learning TF-binding model, on top of sequence.
+   - Improves TF-binding prediction by **up to 10% AUPRC** over sequence-only baselines across multiple human cell lines.
+   - Produces **base-level attribution maps** flagging candidate methylation-sensitive binding sites and TF-TF dependencies.
+   - Discovered-pass hit against the sequence-to-function watch-topic — relevant to adding epigenetic context to `malinois-coda`/`mpac`-style CRE activity models to resolve cell-type-specific ambiguity.
+   https://www.biorxiv.org/content/10.64898/2026.07.06.736502v1
 
 ---
 
