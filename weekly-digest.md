@@ -37,6 +37,42 @@ Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#joint-jax-
 
 ---
 
+## Week of 2026-07-27
+
+1. **Massively parallel characterization and predictive modelling of neuronal regulatory variation** (first: Salomon; senior: Kircher; *bioRxiv* 2026.07.16.738760, July 17 2026).
+   - A **lentiMPRA in human excitatory neurons** measuring **>46,000 naturally occurring variants across >27,000 candidate CREs** near **524 disease-associated genes** — the scale is what makes the negative results below trustworthy.
+   - The resulting catalog **improves regulatory variant-effect prediction beyond state-of-the-art models**, so it functions as **training data and benchmark**, not just a result.
+   - **Significant allelic effects occur at comparable rates among common, rare and singleton variants** — within MPRA-measurable effects, **allele frequency carries little information about per-variant regulatory impact**. That directly undercuts frequency-based prioritization of noncoding candidates.
+   - What *does* predict effect is the element, not the allele: **baseline activity of the enclosing regulatory element and local sequence context** govern both **detectability and magnitude**.
+   - Effects are **distributed across many transcription factors rather than concentrated in master regulators**, consistent with a **combinatorial enhancer architecture**.
+   - Why it matters here: same design logic as **brain-celltype-mpra**, and "baseline activity gates detectability" is a hard **power-calculation constraint** for any MPRA screening disease variants — including the endogenous-readout work behind the GREGoRi U01.
+   Shared `#interesting_papers`.
+   https://www.biorxiv.org/content/10.64898/2026.07.16.738760v1
+   ![fig](https://www.biorxiv.org/content/biorxiv/early/2026/07/17/2026.07.16.738760/F1.large.jpg)
+
+2. **Architectural chromatin interactions provide a framework for context-dependent gene regulation** (first: Likhite; senior: Moore; *bioRxiv* 2026.07.17.739237, July 20 2026).
+   - Integrates **Hi-C, RNAPII ChIA-PET and CTCF ChIA-PET** with the **ENCODE cCRE registry** to classify promoter-centric contacts — the premise being that **chromatin interactions are several biologically distinct classes** that no single assay resolves.
+   - Identifies a class of **candidate architectural promoter–enhancer interactions**: **recurrent across cellular contexts, broader promoter connectivity, and less dependent on linear genomic proximity**.
+   - Many of the anchoring elements **switch between enhancer and CTCF-only states while the interaction itself stays stable** — "**dual-state**" regulatory elements.
+   - Those dual-state elements **acquire context-specific TF inputs inside evolutionarily conserved architectural scaffolds**, supporting a model where **stable architecture is repeatedly repurposed for new regulatory programs**.
+   - Genes connected to them are **enriched for developmental and signaling pathways** and show **increased expression specificity across cell types**.
+   - Why it matters here: a **structural complement** to the lab's enhancer–gene work — architecture supplies the wiring, sequence supplies the switch — built directly on the **ENCODE registry the lab helps functionally validate** as an FCC.
+   Shared `#interesting_papers`.
+   https://www.biorxiv.org/content/10.64898/2026.07.17.739237v1
+   ![fig](https://www.biorxiv.org/content/biorxiv/early/2026/07/20/2026.07.17.739237/F1.large.jpg)
+
+3. **Genetic trade-offs in fertility and longevity explain the maintenance of disease-associated alleles in humans** (first: Brigos-Barril; senior: Muntané; *Nature Ecology & Evolution*, July 21 2026).
+   - Tackles the standing puzzle of **why disease-risk alleles persist** despite costs to health, testing the **life-history / antagonistic-pleiotropy prediction** that they survive by buying reproduction.
+   - Across genome-wide data for **62 diseases plus longevity and fertility**, disease-risk alleles are on average associated with **reduced longevity and increased fertility**.
+   - The subset that **raises both fertility and disease risk shows evidence of having been favoured by selection over the past ~50,000 years** — the trade-off left a **selection footprint**, not just a correlation.
+   - **Mendelian randomization** detects a **causal effect of genetic disease liability on longevity**, but **no robust causal effect on fertility** — so the fertility signal reads as **pleiotropy**, not disease driving reproduction.
+   - Why it matters here: supplies the **population-genetic rationale** for deleterious regulatory alleles sitting at appreciable frequency, which is the backdrop for the lab's **archaic-introgression and variant-effect** lines.
+   Shared `#interesting_papers`.
+   https://www.nature.com/articles/s41559-026-03140-z
+   ![fig](https://media.springernature.com/m685/springer-static/image/art%3A10.1038%2Fs41559-026-03140-z/MediaObjects/41559_2026_3140_Fig1_HTML.png)
+
+---
+
 ## Week of 2026-07-20
 
 1. **An encyclopedia of human enhancer–gene regulatory interactions** (first: Gschwind; senior: Engreitz; *Nature*, July 15 2026).
