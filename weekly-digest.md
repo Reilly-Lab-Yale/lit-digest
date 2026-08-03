@@ -3,7 +3,7 @@
 A weekly scan of new and exciting papers, synthesized for your easy digestion. Just drop a paper in
 slack or email it to me as a suggestion and it will get in here.
 
-Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#joint-jax-yale` `#longevity-consortium` `#talks` `#xspecies-modeling` `#ukbb_crispri`
+Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#joint-jax-yale` `#longevity-consortium` `#talks` `#xspecies-modeling` `#ukbb_crispri` `lab DM`
 
 ---
 
@@ -34,6 +34,81 @@ Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#joint-jax-
    https://www.science.org/doi/10.1126/science.adr6749
    ![fig](https://news.yale.edu/sites/default/files/styles/opengraph_image/public/2026-06/YN_world-map-genome-pacific.jpg?h=b1877eb9&itok=BwVxBfsQ)
    <!-- celebrated: 2026-06-15 -->
+
+---
+
+## Week of 2026-08-02
+
+1. **Locus-Scale Massively Parallel Reporter Assays** (first: McGee; senior: Shendure; *bioRxiv* 2026.07.24.740649, July 28 2026).
+   - Conventional MPRA element length was set by **microarray DNA synthesis limits, not biology** — nearly all MPRAs assay **sub-300 bp fragments** butted against a minimal promoter, while validated developmental enhancers are mostly **>300 bp** and super-enhancers span kilobases.
+   - **LAMPRA** ("long @$$ MPRA") combines **combinatorial cloning, molecular barcoding, and paired long- + short-read sequencing** to measure regulatory output at **multi-kilobase** scale.
+   - Proof of concept assays **36,000 × 5-kb synthetic cis-regulatory loci**, each built as a **5 × 1-kb random combination of enhancers, insulators and spacers** — so the design varies **identity, number, spacing, order and orientation** simultaneously.
+   - The point is **combinatorial logic**: rather than scoring one element in isolation, it measures how CREs interact when assembled into a locus, the regime conventional MPRA cannot reach.
+   - Why it matters here: this is the **length/architecture axis** our own MPRA platform is bounded by. Directly relevant to `scmpraforge` design space, to the **construct-orientation/promoter-contamination** questions raised by the Engreitz promoter-responsiveness paper, and to how far endogenous PEAR-seq readouts can be cross-checked against episomal ones in the GREGoRi aims.
+   - Discovered-pass hit against the MPRA watch-topic.
+   https://www.biorxiv.org/content/10.64898/2026.07.24.740649v2
+   ![fig](https://www.biorxiv.org/content/biorxiv/early/2026/07/28/2026.07.24.740649/F1.large.jpg)
+
+2. **Decoding common and rare noncoding variant effects across cellular and developmental contexts** (first: Marderstein; senior: Montgomery; *Nature Genetics*, July 2026).
+   - The **published journal version of the FLARE preprint** digested here on 2026-06-24 — worth re-reading now that it is final, since it is the closest published framing to Tian Xia's project.
+   - Generates **3 billion deep-learning predictions of chromatin accessibility** across diverse **fetal and adult** cellular contexts, then uses them to prioritize functional noncoding variants.
+   - Central dichotomy: **common variants are more cell-type-specific**, while **ultra-rare variants have larger and broader effects across cell types** — the frequency spectrum and the context-specificity spectrum are coupled.
+   - **Strongest evidence of purifying selection sits in fetal neurons**, i.e. the constraint signal is developmental, not adult.
+   - **FLARE** (Functional Lasso Analysis of Regulatory Evolution) folds evolutionary constraint into the prioritization and generalizes across **de novo mutations in childhood disorders, rare variants behind outlier adult brain expression, and common variants enriched for schizophrenia heritability**.
+   - Steve's read in the lab thread: this is "**exactly the right paper**" for the direction Tian is pushing, but it **stops short of linking regulatory effect to trait** — that gap is the opening.
+   Shared `#interesting_papers`.
+   https://www.nature.com/articles/s41588-026-02619-6
+   ![fig](https://media.springernature.com/m685/springer-static/image/art%3A10.1038%2Fs41588-026-02619-6/MediaObjects/41588_2026_2619_Fig1_HTML.png)
+
+3. **Characterizing homology-induced data leakage and memorization in genome-trained sequence models** (first: Rafi; senior: de Boer; *bioRxiv* 2025.01.22.634321 v2, May 25 2026).
+   - Standard train/test splits of genomic sequence **ignore pervasive within-genome homology**, so test sequences are often near-copies of training sequences — a **leakage** problem, not just a tuning problem.
+   - Simulations show this leakage **inflates apparent model performance**; across a range of published genomics models, **test performance varies systematically with similarity to the training set**.
+   - The failure mode is diagnostic: models do well on **distant** sequences (real generalizable rules) and well on **highly similar** sequences (memorized associations) — but memorization **breaks when homologs have functionally diverged**, which is exactly the case anyone cares about.
+   - Practical consequence: reported benchmark numbers for sequence-to-function models are **not comparable** unless the split is homology-aware.
+   - Why it matters here: Mackenzie Noon flagged it and Erin Gilbertson is **building her own training-partition implementation** to compare against — this bears directly on cross-species CRE prediction, where homology *is* the signal being modelled.
+   Shared `#interesting_papers`.
+   https://www.biorxiv.org/content/10.1101/2025.01.22.634321v2
+   ![fig](https://www.biorxiv.org/content/biorxiv/early/2026/05/25/2025.01.22.634321/F1.large.jpg)
+
+4. **The expression modifier score (EMS) v2 enhances regulatory variant prioritization via Enformer-derived features and multi-task learning** (first: Takahashi; senior: Okada; *Communications Biology*, July 22 2026).
+   - Rebuilds the Expression Modifier Score for prioritizing **causal regulatory variants**, with the largest gains in **tissues with small eQTL sample sizes, such as brain** — precisely where fine-mapping is weakest.
+   - Attributes the improvement to three specific changes: **long-range sequence-interaction features (Enformer-derived)**, a **customized training loss**, and a **multi-task learning framework**.
+   - Validated **out-of-population** on independent Japanese eQTL data, where it beat alternatives and supported **functionally informed fine-mapping** — a real portability test, not just held-out folds.
+   - Combines with the gene-level **polygenic priority score (PoPS)** to prioritize complex-trait-causal regulatory variants, i.e. variant-level and gene-level evidence stacked.
+   - Why it matters here: another entrant in the crowded variant-effect-predictor field that `mpac` must be benchmarked against; the small-sample-tissue claim is the interesting one for brain work.
+   - No figure available — the article is currently posted as an unedited accepted manuscript.
+   Shared `#interesting_papers`.
+   https://www.nature.com/articles/s42003-026-10604-2
+
+5. **Leveraging human genetic variation to therapeutically target hundreds of genes with dominant & dispensable disease alleles** (first: Ramey; senior: Capra; *medRxiv* 2026.03.26.26349431, March 27 2026).
+   - Defines **"dominant & dispensable" (D&D)** disease alleles: in **haplosufficient** genes, one working copy suffices, so silencing only the pathogenic copy is curative in principle. Over **500 genes** qualify.
+   - The trick is **mutation-agnostic targeting**: instead of aiming at the rare pathogenic variant itself, target **common heterozygous variants in linkage with it**, so one therapy covers many patients with different causal mutations.
+   - Scale of the payoff: for some disease genes this makes **>80× more patients treatable** than mutation-specific strategies.
+   - D&D alleles span **neurodegeneration, cardiomyopathies, retinopathies and diabetes** — the logic is not confined to one organ system.
+   - Ships **genome-wide maps of common heterozygous targeting sites** to make the approach broadly usable.
+   - Why it matters here: Erin Gilbertson raised it as the **inverse** of what the lab does — we go from common variation to function, this goes from common variation to a *handle* on rare high-effect alleles. Useful framing for the Locium synthetic-CRE/gene-therapy side and for the GREGoRi rare-disease aims.
+   Shared `lab DM`.
+   https://www.medrxiv.org/content/10.64898/2026.03.26.26349431v1
+   ![fig](https://www.medrxiv.org/content/medrxiv/early/2026/03/27/2026.03.26.26349431/F1.large.jpg)
+
+6. **Deciphering complete archaic introgression sequences in modern human genomes** (first: Suo; senior: G. Zhang; *bioRxiv* 2026.07.23.740208, July 24 2026).
+   - **ASMaid** is an HMM framework that calls archaic ancestry from **haplotype-resolved pangenome assemblies** rather than short-read alignments to a single reference.
+   - Because it integrates **both SNP genotype and structural-variation signals**, it recovers **more intact archaic segments** — the regions reference-based callers systematically lose.
+   - Applied to **610 phased human genome assemblies**, non-Africans carry **~79.8 Mbp of Neanderthal** and **~8.3 Mbp of Denisovan** sequence, both **substantial increases over previous estimates**.
+   - Reports archaic sequence in **structurally complex regions including centromeric contexts** — a class of introgression essentially invisible to conventional maps.
+   - Discovered-pass hit against the archaic-introgression watch-topic; the direct comparison to make is against the **Near Oceania** callset, where the lab reconstructed 1.897 Gbp of archaic sequence including 831.9 Mbp Denisovan — different populations, different method, and a good external check on completeness claims.
+   https://www.biorxiv.org/content/10.64898/2026.07.23.740208v1
+   ![fig](https://www.biorxiv.org/content/biorxiv/early/2026/07/24/2026.07.23.740208/F1.large.jpg)
+
+7. **Balanced polymorphism in a floral transcription factor underlies the ancient rhythm of daily sex alternation in avocado** (first: Groh; senior: Coop; *PNAS* 123(31) e2606876123, July 28 2026).
+   - Avocado and wild Lauraceae relatives run **heterodichogamy**: A-type plants open female-phase flowers in the morning and male-phase in the afternoon, B-types do the reverse, and the whole population is synchronized daily.
+   - The dimorphism maps to **one locus — a pair of dominant/recessive haplotypes at *SDMYB***, an R2R3 MYB transcription factor from a subgroup tied to floral maturation and circadian hormone signalling.
+   - Mechanism is **regulatory, not just coding**: the dominant allele carries nonsynonymous changes in conserved domains **and shows a cis-regulated phase delay** in diel expression that matches the delayed second anthesis of A-type flowers.
+   - The haplotypes form an **ancient trans-species polymorphism** maintained by **negative frequency-dependent balancing selection** — whichever type is rarer has the mating advantage, so both persist across species boundaries.
+   - Why it matters here: a clean textbook case of **balancing selection preserving a cis-regulatory allele over deep time**, and of a single TF's *expression timing* — not its presence — being the phenotypic switch. Good ammunition for the "regulation as a dial" framing.
+   Shared `#interesting_papers`.
+   https://www.pnas.org/doi/10.1073/pnas.2606876123
+   ![fig](https://www.pnas.org/cms/10.1073/pnas.2606876123/asset/8ffad25f-6360-4faf-a081-bbd1ae0e0f34/assets/images/large/pnas.2606876123fig01.jpg)
 
 ---
 
