@@ -3,7 +3,7 @@
 A weekly scan of new and exciting papers, synthesized for your easy digestion. Just drop a paper in
 slack or email it to me as a suggestion and it will get in here.
 
-Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#joint-jax-yale` `#longevity-consortium` `#talks` `#xspecies-modeling` `#ukbb_crispri` `lab DM`
+Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#joint-jax-yale` `#longevity-consortium` `#talks` `#xspecies-modeling` `#ukbb_crispri` `lab DM` `discovered`
 
 ---
 
@@ -34,6 +34,41 @@ Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#joint-jax-
    https://www.science.org/doi/10.1126/science.adr6749
    ![fig](https://news.yale.edu/sites/default/files/styles/opengraph_image/public/2026-06/YN_world-map-genome-pacific.jpg?h=b1877eb9&itok=BwVxBfsQ)
    <!-- celebrated: 2026-06-15 -->
+
+---
+
+## Week of 2026-08-09
+
+1. **Active learning of enhancers and silencers in the developing neural retina** (first: Friedman; senior: Cohen; *Cell Systems* 16(1), online January 7 2025).
+   - Trains models to separate **enhancers from silencers built from the same CRX binding sites** — the case where a single TF activates in one context and represses in another, which sequence models routinely get wrong.
+   - The core move is **active learning**: instead of training once on whatever the genome happens to contain, the model **nominates the sequences it is least certain about**, those get synthesized and measured, and the cycle repeats.
+   - This attacks the real bottleneck directly — **the genome does not contain enough natural CREs** to teach a model the higher-order interactions among motifs, so genome-trained models mostly rediscover the same large-effect motifs a motif scanner would find.
+   - Iterating the loop recovers **grammar rules that distinguish activation from repression**, not just which motifs are present.
+   - **Why it matters here:** this is the formal version of the lab-meeting idea Mackenzie flagged — **design the next MPRA library where the model is struggling**, rather than tiling more genome. Directly applicable to CODA/Malinois retraining and to how the next brain-cell-type library gets specified.
+   - Steve's read: active learning was a hot ML topic a few years back, but it is **a good reminder of its utility in data-limited spaces** — which is exactly the regime MPRA design sits in.
+   Shared `#interesting_papers`.
+   https://pubmed.ncbi.nlm.nih.gov/39778579/
+
+2. **Resolving systematic errors in widely used enhancer activity assays in human cells** (first: Muerdter; senior: Stark; *Nat Methods* 15, online December 11 2017).
+   - Two plasmid artifacts corrupt reporter assays: the **bacterial origin of replication acts as a competing core promoter**, and **transfection itself triggers a type-I interferon response**.
+   - The ORI effect produces **false negatives** — a real enhancer looks dead because the ORI is already driving the transcript that gets counted.
+   - The IFN-I response produces **false positives and distorted rankings**, because interferon-stimulated genes light up as a consequence of the delivery method rather than the sequence being tested.
+   - The fix is twofold: **use the ORI as the sole core promoter** so it is a known constant instead of a hidden competitor, and **pharmacologically block the IFN-I response** during the assay.
+   - With both corrections, single-candidate luciferase, MPRA, and STARR-seq all clean up enough to support **genome-wide enhancer screens**.
+   - **Why it matters here:** an older paper, but it landed in `#interesting_papers` this week and ran a 20-reply thread — these are exactly the confounders that show up when comparing MPRA constructs across cell lines, and they bear on current construct-design and orientation decisions.
+   Shared `#interesting_papers`.
+   https://www.nature.com/articles/nmeth.4534
+   ![fig](https://media.springernature.com/m685/springer-static/image/art%3A10.1038%2Fnmeth.4534/MediaObjects/41592_2018_Article_BFnmeth4534_Fig1_HTML.jpg)
+
+3. **Deep learning-guided design of cell type-specific AAV promoters** (first: S.K. Wang; senior: S. Wang; *bioRxiv* 2026.01.13.699371, posted January 14 2026).
+   - Head-to-head comparison of **three strategies for designing cell-type-specific AAV promoters** from single-cell chromatin accessibility data, including **de novo generation by a deep model**.
+   - **Deep-learning-guided design consistently beat the rational approaches** in vivo, targeting retinal ganglion cells and horizontal cells in mouse retina with **stronger and more specific expression**.
+   - The synthetic promoters were **payload-agnostic** — they drove diverse transgenes well enough to both **record from and ablate** the targeted cells.
+   - Activity **carried over into human retinal organoids**, the key translation signal: a sequence designed on mouse accessibility data still behaved in human tissue.
+   - **Why it matters here:** this is the CODA thesis validated in a different tissue and a different lab, and it is the closest external benchmark for the Locium synthetic-promoter line — worth reading alongside the AAV off-target-toxicity and clinical-promoter-benchmark memos now circulating on that project.
+   Shared `discovered`.
+   https://www.biorxiv.org/content/10.64898/2026.01.13.699371v1
+   ![fig](https://www.biorxiv.org/content/biorxiv/early/2026/01/14/2026.01.13.699371/F1.large.jpg)
 
 ---
 
