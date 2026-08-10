@@ -48,6 +48,7 @@ Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#joint-jax-
    - Steve's read: active learning was a hot ML topic a few years back, but it is **a good reminder of its utility in data-limited spaces** — which is exactly the regime MPRA design sits in.
    Shared `#interesting_papers`.
    https://pubmed.ncbi.nlm.nih.gov/39778579/
+   ![fig](https://www.cell.com/cms/10.1016/j.cels.2024.12.004/asset/5c9026dd-23fa-4cd7-a560-710de5539325/main.assets/gr1.jpg)
 
 2. **Resolving systematic errors in widely used enhancer activity assays in human cells** (first: Muerdter; senior: Stark; *Nat Methods* 15, online December 11 2017).
    - Two plasmid artifacts corrupt reporter assays: the **bacterial origin of replication acts as a competing core promoter**, and **transfection itself triggers a type-I interferon response**.
@@ -79,6 +80,17 @@ Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#joint-jax-
    - **Why it matters here:** it is a Pinello-lab release, and it is the closest thing yet to an off-the-shelf harness for the ensemble-of-oracles comparisons the lab keeps doing by hand. Worth a look for MPRAgent and for benchmarking against Malinois.
    Shared `#interesting_papers`.
    https://github.com/pinellolab/chorus
+
+5. **Pangenome Graph Node-Phenotype Association shows GWAS-like quality results with only few individuals** (first: Carrette; senior: Muller; *bioRxiv* 2026.07.31.741971, July 31 2026).
+   - **GraNPA** runs a GWAS-like association directly on a **pangenome variation graph** instead of on variant calls against a single reference.
+   - Because a graph node *is* the variation, the same analysis covers **everything from SNPs to large structural variants** in one pass — no separate SV pipeline, and **no reference bias introduced by variant calling**.
+   - Phenotype information is folded into the nodes to give each one a **Phenotype Score**; associated regions fall out as **statistically significant shifts in the PS distribution**, reported with positions and scores.
+   - The headline claim is sample size: it recovered known loci from **a few dozen complete genomes** — the *Sub1A* submergence locus in rice from a **13-individual** graph, and the insertion behind white-headed cattle from a **24-individual** graph — with **no kinship or population panel required**.
+   - Current limit is honest and clearly stated: **qualitative phenotypes only**.
+   - **Why it matters here:** Erin flagged this for Tian as **an alternative attack on the rare-variant problem** — if the association unit is a graph node rather than a called variant, rare and structural variation stop being systematically invisible, and you stop needing hundreds of individuals to see them. Different lever than the FLARE/ChromBPNet route, worth knowing about.
+   Shared `#interesting_papers`.
+   https://www.biorxiv.org/content/10.64898/2026.07.31.741971v1
+   ![fig](https://www.biorxiv.org/content/biorxiv/early/2026/07/31/2026.07.31.741971/F1.large.jpg)
 
 ---
 
