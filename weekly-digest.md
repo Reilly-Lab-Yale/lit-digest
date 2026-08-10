@@ -70,6 +70,16 @@ Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#joint-jax-
    https://www.biorxiv.org/content/10.64898/2026.01.13.699371v1
    ![fig](https://www.biorxiv.org/content/biorxiv/early/2026/01/14/2026.01.13.699371/F1.large.jpg)
 
+4. **Chorus: a unified interface for genomic sequence oracles** (first: Penzar; senior: Pinello; *software release (GitHub)*, 2026).
+   - Puts **eight sequence-to-function models behind one API** — AlphaGenome, Enformer, Borzoi, ChromBPNet/BPNet, Sei, LegNet, EPInformer-seq, Cherimoya/CATv1 — so a question can be asked of all of them instead of one at a time.
+   - The genuinely useful bit is **normalization**: every prediction comes back as an **effect percentile and an activity percentile**, calibrated against per-track CDF backgrounds built from thousands of sampled SNPs and genome-wide positions. That makes raw scores from different oracles **actually comparable**, which is the thing that normally blocks ensembling.
+   - Each oracle runs in **its own conda environment**, which is what makes an eight-model install tractable at all; weights are **mirrored to HuggingFace** so the install path survives upstream churn (TFHub deprecation, dead Zenodo links).
+   - Ships a **22-tool MCP server** — you can point Claude at it and ask in plain English for variant effects, region swaps, gene-TSS lookups, or cell-type discovery, and it picks the tool.
+   - Supports **region replacement**: swap a synthetic sequence in for an endogenous element and predict accessibility across cell types — directly the CODA/synthetic-CRE design loop.
+   - **Why it matters here:** it is a Pinello-lab release, and it is the closest thing yet to an off-the-shelf harness for the ensemble-of-oracles comparisons the lab keeps doing by hand. Worth a look for MPRAgent and for benchmarking against Malinois.
+   Shared `#interesting_papers`.
+   https://github.com/pinellolab/chorus
+
 ---
 
 ## Week of 2026-08-02
