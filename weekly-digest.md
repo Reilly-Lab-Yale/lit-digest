@@ -37,6 +37,46 @@ Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#joint-jax-
 
 ---
 
+## Week of 2026-08-16
+
+1. **Uniform processing and analysis of IGVF massively parallel reporter assay data with MPRAsnakeflow** (first: Rosen; senior: Schubach; *bioRxiv* 2025.09.25.678548, posted September 29 2025; now out in *Genome Research*).
+   - The **IGVF Consortium's MPRA focus group** standard: harmonized file formats plus **MPRAlib + MPRAsnakeflow**, a Snakemake pipeline taking raw MPRA reads all the way to counts, QC, and visualization.
+   - Characterizes the technical variability sources that actually move MPRA results — **barcode sequence bias, outlier barcodes, and delivery method (episomal vs. lentiviral)** — and turns them into concrete best-practice recommendations.
+   - Built explicitly for **cross-study integration**: uniform processing is the precondition for pooling MPRA datasets across labs and library designs.
+   - **Why it matters here:** this is fast becoming the field-standard pipeline for exactly the kind of MPRA data the lab generates (scMPRAforge, brain-celltype-mpra, Locium screens) — worth a direct comparison against the lab's in-house processing choices, especially the barcode-bias and delivery-method corrections.
+   Shared `#interesting_papers`.
+   https://www.biorxiv.org/content/10.1101/2025.09.25.678548v2
+   ![fig](https://www.biorxiv.org/content/biorxiv/early/2025/09/29/2025.09.25.678548/F1.large.jpg)
+
+2. **Plasticity of human microglia and brain perivascular macrophages in aging and Alzheimer's disease** (first: Lee; senior: Roussos; *Nature Genetics*, online August 11 2026).
+   - Profiles **832,505 myeloid cells** (microglia + perivascular macrophages) from the prefrontal cortex of **1,607 donors** spanning the human lifespan and the full range of AD neuropathology — the largest reference of its kind.
+   - Delineates **13 transcriptionally distinct subtypes across 6 subclasses**, and tracks how their proportions shift with aging and AD progression.
+   - A **GPNMB-high, disease-associated microglial subtype** expands with AD pathology and shows **elevated phagocytic activity** rather than pure damage — a protective, not purely pathogenic, disease-state signature.
+   - **MITF** is identified as the upstream regulator required to sustain this state, and the protective effect is shown to **depend on TREM2 signaling** in both human tissue and mouse models; cell-cell interaction analysis further flags APOE–SORL1 and APOE–TREM2 as the relevant signaling pairs.
+   - **Why it matters here:** this lands directly on the lab's own (Drive-only, not yet in this repo) Microglia R01 draft, *"Accessing diseased microglia via synthetic regulatory elements and longitudinal imaging"* — its Aim 2 is built around measuring and synthetically targeting homeostatic vs. DAM microglial states. This paper supplies exactly the kind of molecularly defined DAM-state markers (GPNMB/MITF/TREM2) that Aim 2's synthetic-CRE design would need to build around, and is a strong citation for the R01's premise that DAM states are a druggable, trackable target.
+   Shared `#interesting_papers`.
+   https://www.nature.com/articles/s41588-026-02716-6
+   ![fig](https://media.springernature.com/m685/springer-static/image/art%3A10.1038%2Fs41588-026-02716-6/MediaObjects/41588_2026_2716_Fig1_HTML.png)
+
+3. **Investigating Data Size, Sequence Diversity, and Model Complexity in MPRA-based Sequence-to-Function Prediction** (first: Sheng; senior: Mostafavi; *bioRxiv* 2025.03.11.642630, posted March 13 2025).
+   - Builds the **MPRA Dataset Collection (MDC)**: 150M+ labeled DNA subsequences pooled from 12 studies, mixing **random synthetic libraries and natural genomic sequences** with varied functional readouts (expression, splicing).
+   - Systematically studies how **training data size, sequence diversity, and model complexity** trade off against how well a sequence-to-function model generalizes.
+   - Key empirical result: models trained on **native genomic sequence are initially more accurate**, but models trained on **randomized sequence libraries eventually overtake them given enough data** — randomized sequences pack more distinct information per base than the genome does.
+   - **Why it matters here:** this is a direct, concrete test of the "hold out the genome" debate that ran through `#interesting_papers` this week (Steve, Mackenzie, Grace, Aug 12) — the sticking point the group landed on is that "large enough" data is never the regime the lab actually operates in, so a smarter middle path (a data-embedding-guided choice of which sequences an MPRA library should even contain) may matter more for CODA/Malinois retraining than brute-force library scale.
+   Shared `#interesting_papers`.
+   https://www.biorxiv.org/content/10.1101/2025.03.11.642630v1
+   ![fig](https://www.biorxiv.org/content/biorxiv/early/2025/03/13/2025.03.11.642630/F1.large.jpg)
+
+4. **Correcting signal biases and detecting regulatory elements in STARR-seq data** (first: Kim; senior: Reddy; *Genome Research* 31(5):877, 2021).
+   - Identifies the **technical biases that explain most of the variance in raw STARR-seq signal** (fragment-level composition and mappability effects), rather than treating that variance as biological.
+   - Builds a statistical correction model that **substantially improves precision and recall** for calling regulatory elements, including **repressive** elements that naive pipelines tend to miss entirely.
+   - Controls false discovery despite the **strong local spatial correlation** inherent to reporter-assay signal tracks.
+   - **Why it matters here:** an older paper, but Jared re-surfaced it this week as a reference point for signal-bias correction — directly relevant background for any STARR-seq-adjacent QC or construct-design discussion in the lab's own reporter-assay pipelines.
+   Shared `#interesting_papers`.
+   https://genome.cshlp.org/content/31/5/877
+
+---
+
 ## Week of 2026-08-09
 
 1. **Active learning of enhancers and silencers in the developing neural retina** (first: Friedman; senior: Cohen; *Cell Systems* 16(1), online January 7 2025).
