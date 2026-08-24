@@ -37,6 +37,40 @@ Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#joint-jax-
 
 ---
 
+## Week of 2026-08-23
+
+1. **Responsiveness of epigenetic aging biomarkers to longevity interventions in humans** (first: Sehgal; senior: Higgins-Chen; *Nature Medicine*, August 21 2026).
+   - Builds **TranslAGE**, a harmonized database of **51 longitudinal interventional studies**, then recomputes **16 prominent epigenetic clocks plus 94 other DNAm biomarkers** on every one — so clock behaviour is finally comparable across trials instead of trapped in each paper's own pipeline.
+   - The central question is **surrogate-endpoint validity**: a clock is only useful as a trial readout if it actually *moves* when you intervene. Most clocks were built to predict age or mortality cross-sectionally, and that is not the same property.
+   - **Clocks trained on mortality or pace-of-aging respond most strongly** and agree with each other; first-generation chronological-age clocks are comparatively inert. The training target, not the algorithm, is what determines responsiveness.
+   - **Pharmacological and lifestyle interventions drive the largest DNAm biomarker shifts** — but the paper's own framing of "longevity intervention" is broad (rapamycin and metformin sit alongside kidney transplant, gastric bypass, plasmapheresis, HBOT), so much of the signal is plausibly **disease-state reversal in specific patients rather than aging per se** — a caveat Isabel flagged when sharing it.
+   - **Why it matters here:** this is the measurement-layer counterpart to the Longevity Consortium's sequence-layer work. If mortality-trained clocks are the responsive ones, they are the readouts worth pairing with regulatory-variant and comparative-genomics evidence.
+   Shared `#interesting_papers`.
+   https://www.nature.com/articles/s41591-026-04562-9
+   ![fig](https://media.springernature.com/m685/springer-static/image/art%3A10.1038%2Fs41591-026-04562-9/MediaObjects/41591_2026_4562_Fig1_HTML.png)
+
+2. **Functional impact of genetic background on variable expressivity in neurodevelopmental disorders** (first: Sun; senior: Girirajan; *Nature Communications*, August 2026).
+   - Uses the **16p12.1 deletion** as a tractable paradigm for **variable expressivity**: same CNV, very different phenotypes, and the usual explanation ("genetic background") is rarely made mechanistic.
+   - Design pairs **patient-family iPSC lines with CRISPR-engineered isogenic 16p12.1 deletions**, which separates the deletion's own effect from the background it lands in — the isogenic arm is what makes the comparison interpretable.
+   - Finding: **the deletion and rare background variants jointly shape chromatin accessibility and expression of neurodevelopmental genes**. Background is not noise added on top; it is co-determining the regulatory state.
+   - Cellular phenotypes are **family-specific** — altered inhibitory-neuron production and NPC proliferation — and **correlate with head-size variation** in the corresponding patients, tying the dish back to the clinic.
+   - **CRISPR activation of individual 16p12.1 genes variably rescues** the defects through developmental signaling, and integrative analysis nominates regulatory hubs including **FOXG1 and JUN**. Variable rescue is itself the point: which gene matters depends on background.
+   - **Why it matters here:** this is the clean statement of the problem the ClinVar/GREGoRi work has to survive — a variant's functional readout is background-dependent, which argues for testing in multiple genetic contexts rather than one reference line.
+   Shared `#interesting_papers`.
+   https://www.nature.com/articles/s41467-026-72598-z
+   ![fig](https://media.springernature.com/m685/springer-static/image/art%3A10.1038%2Fs41467-026-72598-z/MediaObjects/41467_2026_72598_Fig1_HTML.png)
+
+3. **Systemic epigenetic dysregulation as a driver of ageing and a therapeutic target** (first: Yücel; senior: Gladyshev; *Nature Reviews Molecular Cell Biology*, 2026).
+   - Review proposing **"epigenetic fidelity"** — the capacity of chromatin regulatory systems to hold precise expression states — as the organizing variable, with aging framed as its progressive failure.
+   - Four interdependent failure modes: **nuclear-architecture deterioration (lamina-associated domain breakdown)**, **loss of epigenetic memory via chromatin-modifying complexes such as PRC2**, **nucleosome alteration through replication-independent H3.3 accumulation**, and **transcription-factor-driven reprogramming**.
+   - The argument is explicitly **systems-level**: these processes cross-regulate, so a local defect cascades into broader loss of cell-state maintenance — which is why single-target interventions tend to disappoint.
+   - **Why it matters here:** the **transcription-factor reprogramming** arm is the actionable one for this lab — it predicts that aging shifts *which* TFs occupy regulatory elements, a hypothesis MPRA and comparative CRE work can test directly. Flagged in the Longevity Consortium channel with a specific suggestion to **look at AP-1 binding sites**.
+   Shared `#longevity-consortium`.
+   https://www.nature.com/articles/s41580-026-00958-0
+   ![fig](https://media.springernature.com/m685/springer-static/image/art%3A10.1038%2Fs41580-026-00958-0/MediaObjects/41580_2026_958_Fig1_HTML.png)
+
+---
+
 ## Week of 2026-08-16
 
 1. **Uniform processing and analysis of IGVF massively parallel reporter assay data with MPRAsnakeflow** (first: Rosen; senior: Schubach; *bioRxiv* 2025.09.25.678548, posted September 29 2025; now out in *Genome Research*).
