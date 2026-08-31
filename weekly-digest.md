@@ -7,6 +7,31 @@ Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#joint-jax-
 
 ---
 
+## Week of 2026-08-30
+
+1. **Predictive design of tissue-specific mammalian enhancers that function in the mouse embryo** (first: Chen; senior: Stark; *Nature Genetics*, August 2026).
+   - **Compact CNNs, not foundation models.** Pre-trained on E11.5 mouse **ATAC-seq** (heart, limb, midbrain), then **fine-tuned by transfer learning** on only **311–432 VISTA-validated enhancers per tissue**.
+   - **15 of 15 designed enhancers were active in their intended tissue** in E11.5 mouse embryos (site-specific transgenic reporter, no background activity) — a **100% in vivo hit rate** from de novo sequences with no significant similarity to mouse or human genomes.
+   - The two-step recipe is the whole result: models trained on **accessibility alone or enhancers alone** dropped PPV to **20.9–52.1%**, versus **≥70.6%** for the transfer-learned models.
+   - Transfer learning **re-weights motifs toward tissue master regulators** (MEF2/heart, TWIST1/limb, SOX3/CNS) and **down-weights broadly-expressed factors** like CTCF — evidence the models learn regulatory grammar, not chromatin memorization.
+   - Design used **Ledidi** gradient-based sequence optimization jointly against the accessibility and activity models; **≥69.7%** of high-scoring designs scored low in the two off-target tissues.
+   - **Why it matters here:** this is the mammalian-in-vivo counterpart to the lab's MPRA-trained design work (CODA, synthetic CRE efforts) — and a direct existence proof that **modest, cheap training sets beat MPRA scale** for in-vivo enhancer design. Relevant to the synthetic-CRE and TRA design aims.
+   Shared `#interesting_papers`.
+   https://www.nature.com/articles/s41588-026-02729-1
+   ![fig](https://www.biorxiv.org/content/biorxiv/early/2025/12/22/2025.12.22.695948/F1.large.jpg)
+
+2. **Human brain organoids record the passage of time over multiple years** (first: Antón-Bolaños; senior: Arlotta; *Nature*, August 19 2026).
+   - Brain organoids maintained and profiled for **over five years** — by a wide margin the longest sustained human-neural-tissue culture — by **adapting culture medium to sustain spontaneous neuronal activity** rather than merely keeping cells alive.
+   - The organoids **kept developing, not just surviving**: cell types emerged in the correct developmental order, connectivity increased, and genes switched on/off on schedule.
+   - The hardest evidence is **epigenetic**: **DNA methylation accumulated along the characteristic human developmental trajectory**, and after ~1 year organoids showed **postnatal-stage features**.
+   - **Cells retain a memory of developmental time** — dissociated old organoids regenerate late-stage cell types; mixing old with young cells **restores neurogenic capacity, but only for late-stage neuron types**.
+   - **Why it matters here:** a tractable substrate for **maturation-dependent regulatory variation** — the cell-state axis the lab keeps arguing matters more than cell type. Directly relevant to neuro/neurodegeneration framing and to any MPRA or CRISPR readout that needs a genuinely mature human neural context.
+   Shared `#interesting_papers`.
+   https://www.nature.com/articles/s41586-026-10877-x
+   ![fig](https://mediasvc.eurekalert.org/Api/v1/Multimedia/ecf7545e-4c4d-4ae9-8593-c9cb99e710c4/Rendition/thumbnail/Content/Public)
+
+
+---
 ## 🎉 Hot off the press — from the Reilly Lab!
 
 1. **The Encyclopedia of DNA Elements** (first: ENCODE Project Consortium; senior: T. Reddy; *bioRxiv* 2026.07.06.731365, July 8 2026).
