@@ -7,6 +7,54 @@ Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#joint-jax-
 
 ---
 
+## Week of 2026-09-13
+
+1. **Predicting genome-wide functional constraints with GPN-Star** (first: Ye; senior: Song; *Nature*, 09 September 2026).
+   - **A genomic language model with phylogeny built into the architecture** — GPN-Star conditions on whole-genome **alignments plus the species tree**, instead of asking a large transformer to rediscover evolutionary relatedness from raw sequence.
+   - Trained separately at **vertebrate, mammal and primate timescales**, and the comparison is the interesting part: **which timescale wins is task-dependent**, with deeper evolution favouring some constraint tasks and recent divergence favouring others.
+   - **State of the art across coding and non-coding variant effect prediction**, beating both standard gLMs and classical evolutionary models — the failure mode the authors call out for NLP-derived gLMs is that they are big and expensive yet still lose to phyloP-class methods.
+   - Downstream genetics gains are concrete: **better prioritization of pathogenic and fine-mapped GWAS variants, stronger complex-trait heritability enrichments, and more power in rare-variant association testing**.
+   - Generalizes beyond humans — trained for **mouse, chicken, *Drosophila*, *C. elegans* and *Arabidopsis***, arguing the framework rides the growth of comparative genomics rather than model scale.
+   - **Why it matters here:** a conservation-native prior that is directly comparable to MPAC and Malinois-class sequence-to-function models, and Erin is already using it. The timescale decomposition is the piece worth stealing — it is the same question the archaic-introgression work asks about **when** constraint was imposed.
+   Shared `#interesting_papers`.
+   https://www.nature.com/articles/s41586-026-11005-5
+   ![fig](https://media.springernature.com/lw685/springer-static/image/art%3A10.1038%2Fs41586-026-11005-5/MediaObjects/41586_2026_11005_Fig1_HTML.png)
+
+2. **3D epigenome of glial cell types in developing human cortex** (first: Jones; senior: Shen; *Nature*, 02 September 2026).
+   - Profiles **four glial populations from mid-gestation human neocortex** — ventricular radial glia, outer radial glia, OPCs and microglia — integrating **expression, accessibility, DNA methylation and 3D chromatin contacts**.
+   - The logic is that **looping, not linear proximity, assigns a cCRE to its gene**: cell-type-specific contacts are what let them call cell-type-specific candidate cis-regulatory elements at all.
+   - **cCREs were validated in transgenic mouse embryos**, so this is not a correlative atlas — the regulatory calls carry in-vivo evidence.
+   - Machine learning prioritized **112 schizophrenia risk variants inside glial cCREs**, and the **rs4449074 risk allele was confirmed in vivo to disrupt a vRG enhancer** — a clean variant→element→cell-type→disease chain.
+   - **oRG cCREs are enriched for human accelerated regions**, and a subset of those HARs show **activity differences from their chimpanzee orthologues**, contacting genes in neuronal development.
+   - **Why it matters here:** this is the brain-cell-type regulatory map the brain-celltype-MPRA project is aimed at, and the HAR/chimp-ortholog comparison is exactly the human-specific-regulation axis the lab's evolution work runs on. Also a benchmark set of validated cell-type cCREs to test MPRA designs against.
+   Shared `#interesting_papers`.
+   https://www.nature.com/articles/s41586-026-10987-6
+   ![fig](https://media.springernature.com/lw685/springer-static/image/art%3A10.1038%2Fs41586-026-10987-6/MediaObjects/41586_2026_10987_Fig1_HTML.png)
+
+3. **AlphaGenome Atlas: a predictive map of every possible DNA letter change in the human genome** (first: Cheng; senior: Avsec; *Google DeepMind — resource release + technical report*, 08 September 2026).
+   - **Precomputed AlphaGenome predictions for all ~9 billion possible single-nucleotide variants** in the human genome — roughly **27,000 prediction values per variant**, ~1 petabyte, free for academic use via a portal and the API.
+   - Ships a single summary number, the **AlphaGenome Variant Impact (AVI) score**, which fuses AlphaGenome's regulatory predictions with **AlphaMissense**'s protein-level score so coding and non-coding variants are **ranked on one scale**.
+   - AVI is **decomposed into additive feature attributions** — accessibility, splicing, conservation — so a score comes with a mechanism rather than a bare number.
+   - Also releases a compendium of **>2,500 de novo sequence motifs** with genomic locations, usable for TF-binding interpretation of non-coding variants.
+   - Early external uses: **GREGoR** investigators prioritized an overlooked *DNM1* splice-creating variant in unsolved rare disease; a UK Biobank reanalysis of **54,000 whole genomes found 22% more non-coding associations** by grouping rare variants on predicted molecular effect.
+   - **Why it matters here:** a free, genome-wide baseline that every variant-effect claim will now be compared against — relevant to MPAC benchmarking and to the GREGoRi U01, whose consortium is already named as a user. ⚠ VERIFY: authorship is taken from the contributor list on the release page (Jun Cheng listed first, Žiga Avsec last); there is no conventional journal byline yet.
+   Shared `#interesting_papers`.
+   https://deepmind.google/blog/alphagenome-atlas-a-predictive-map-of-every-possible-dna-letter-change-in-the-human-genome/
+   ![fig](https://lh3.googleusercontent.com/vOjFcTcdX2GCEB9yk-tJ7GAfyhTAMo-zW7scq3TrT9qk1mYw5qE0BdUqI8XQclMuUchZr7pYUFdVt3ZzrXc1NGFFJOqi7kIUX_QuAXZR7lkVzxjk=w1200-h630-n-nu-rw)
+
+4. **Insights into longevity and virus-driven adaptation from *Myotis* bat genomes** (first: Vazquez; senior: Sudmant; *Nature*, 26 August 2026).
+   - **Near-complete genome assemblies plus cell lines for eight closely related *Myotis* species** — the tight phylogenetic spacing is what makes selection scans interpretable here.
+   - The central claim is a **link between longevity and antiviral immunity through pleiotropy**, rather than two independent bat superpowers.
+   - **Different virus classes leave different signatures**: genome-wide over-representation of **positive selection in DNA-virus-interacting proteins**, but elevated **copy-number variation for RNA-virus-interacting proteins**.
+   - ***Myotis*-specific duplications of *EIF2AK2*/PKR** carry **ancient trans-species copy-number polymorphisms** — variation maintained across speciation events, a strong signal of long-term balancing pressure.
+   - **Recurrent evolution of long lifespan tracks positive selection in cancer pathways**, backed by a distinct DNA-damage response in primary cells of the long-lived *M. lucifugus*.
+   - **Why it matters here:** a template for pairing comparative selection scans with functional assays in primary cells — the structural-variation-plus-selection framing is directly useful to the Longevity Consortium U19 and to the sweeps/DeepSweep line of work.
+   Shared `#interesting-papers_evolution`.
+   https://www.nature.com/articles/s41586-026-10932-7
+   ![fig](https://media.springernature.com/lw685/springer-static/image/art%3A10.1038%2Fs41586-026-10932-7/MediaObjects/41586_2026_10932_Fig1_HTML.png)
+
+---
+
 ## Week of 2026-08-30
 
 1. **Predictive design of tissue-specific mammalian enhancers that function in the mouse embryo** (first: Chen; senior: Stark; *Nature Genetics*, August 2026).
