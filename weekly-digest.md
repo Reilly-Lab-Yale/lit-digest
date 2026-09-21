@@ -7,6 +7,82 @@ Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#joint-jax-
 
 ---
 
+## Week of 2026-09-20
+
+1. **Massively parallel characterization reveals context-dependent and non-additive regulatory effects of closely spaced variant pairs** (first: Kreevan; senior: Org; *bioRxiv*, 11 September 2026).
+   - An MPRA over **7,285 pairs of close-proximity SNVs** drawn from blood-specific and broadly active enhancers, with **all four haplotypes** of each pair assayed in K562 — the design that actually isolates joint effects rather than inferring them.
+   - Pairs were enriched for function by requiring **at least one member to be an eQTLGen eQTL**, so this is not a random-variant survey.
+   - **57% of pairs had at least one derived haplotype differing significantly from the ancestral haplotype**, and individual variant effects frequently **flipped sign depending on the neighbouring allele** — allelic background, not the variant alone, sets the effect.
+   - In a high-confidence subset, **59% (105/178) of pairs were non-additive**, and **non-additive pairs sat closer together than additive ones** — a distance dependence, which is the mechanistic tell.
+   - The dominant deviation is **sub-additive**: when both single-derived haplotypes raised activity, the double-derived haplotype came in **below the additive expectation**, consistent with saturation/redundancy rather than cooperativity.
+   - **Why it matters here:** this is the empirical counterpart to the exact reviewer question live on MPAC this week (R1C9 — haplotypes with empirical activity but near-zero prediction). It supplies external evidence that non-additivity is common, distance-dependent and largely sub-additive, which is precisely the regime a model trained on reference + single-variant alternates cannot represent. Also a ready-made benchmark for haplotype-level variant-effect prediction.
+   Shared `discovered`.
+   https://www.biorxiv.org/content/10.64898/2026.09.10.750584v1
+   ![fig](https://www.biorxiv.org/content/biorxiv/early/2026/09/11/2026.09.10.750584/F1.large.jpg)
+
+2. **Estimating cis and trans contributions to differences in gene regulation** (first: Hallgrímsdóttir; senior: Pachter; *GENETICS*, 11 September 2026).
+   - A statistical framework for splitting an expression difference between two strains or species into a **cis component (local, allele-linked)** and a **trans component (diffusible, acting on both alleles)**.
+   - The identifying logic is the classic F1-hybrid contrast: **allele-specific expression in the hybrid isolates cis**, and the difference between the parental ratio and the hybrid ratio gives trans — this work is about estimating that decomposition properly rather than by ad-hoc ratios.
+   - Demonstrated across **yeast, human–chimpanzee hybrid cells, and mouse datasets**, with the claim that it **outperforms the prior analyses of those same datasets** — i.e. the re-analysis changes conclusions, not just error bars.
+   - **Why it matters here:** the cis/trans split is the hinge of cross-species regulatory work — an MPRA measures cis by construction, so knowing how much of a between-species expression difference is cis at all bounds what a reporter assay can ever explain. Directly relevant to the xspecies-modeling thread and to interpreting human–chimp regulatory divergence.
+   - ⚠ VERIFY: advance-access article; metadata taken from Crossref (the OUP page is bot-gated), and no figure could be retrieved.
+   Shared `#interesting_papers`.
+   https://academic.oup.com/genetics/advance-article/doi/10.1093/genetics/iyag228/8790449
+
+3. **Using sequence-to-function models to interpret archaic hominin introgression** (first: Comerford; senior: Gallego Romero; *bioRxiv*, 01 September 2026).
+   - Applies **AlphaGenome to 144,139 introgressed SNPs** segregating in present-day Papuan-ancestry individuals — a population whose introgressed variation is badly under-represented in reference resources, which is the gap the paper is built around.
+   - The headline result is a **split verdict**: **chromatin-accessibility predictions recapitulate experimentally observed effects, while gene-expression predictions perform no better than chance**.
+   - Sharper still, predictions **correlate better with a reporter assay of single-variant activity than with the same variants' effects in live cells** — the model is capturing *regulatory potential* of a sequence, not its realized effect in native chromatin.
+   - Tissue-specific predictions let them nominate affected tissues for introgressed haplotypes, and they flag **JAK1 and TAB2** as genes under haplotypes carrying an excess of high-impact accessibility variants.
+   - The authors are explicit about the limits: **variant→target-gene assignment and expression prediction remain unsolved** for introgressed variation.
+   - **Why it matters here:** a direct, sober benchmark of a frontier sequence-to-function model on the lab's own archaic-introgression problem — and the finding that predictions track MPRA-style episomal activity better than in-cell effects is an argument *for* the reporter-assay-grounded approach, not against it.
+   Shared `discovered`.
+   https://www.biorxiv.org/content/10.64898/2026.08.31.748430v1
+   ![fig](https://www.biorxiv.org/content/biorxiv/early/2026/09/01/2026.08.31.748430/F1.large.jpg)
+
+4. **Identifying human-specific transcription factor binding site gains and losses that contribute to human-specific phenotypes** (first: Ferrando-Bernal; senior: Capra; *bioRxiv*, 12 September 2026).
+   - Predicts **TFBS gains and losses for 16,883 modern-human-specific high-frequency variants** — the variants fixed or near-fixed in humans but ancestral in Neanderthal, Denisovan and great apes.
+   - Intersecting with experimentally annotated **cCREs yields 3,357 human-specific variants that alter a motif**, the tractable subset of an otherwise uninterpretable catalogue.
+   - The prioritization move is the interesting one: keep variants where **the target gene and the disrupted transcription factor are independently associated with the same phenotype** — a convergence filter rather than a score threshold.
+   - That yields **128 candidate regulatory variants across 155 genes and 58 skeletal traits** known to differ between modern humans and archaic hominins, where the fossil record supplies an independent check.
+   - Enrichment analyses extend the signal to **tissues with no fossil record — brain, vocal cords, testes and other reproductive organs**.
+   - Independent support: the candidates are **enriched in modern-human-derived differentially methylated regions and among variants shown to alter expression in MPRAs**.
+   - **Why it matters here:** a curated, motif-mechanistic shortlist of human-specific regulatory variants with MPRA-based validation already partly in hand — an obvious library input, and a complement to the hCONDEL line of work that asks the same question from deletions rather than substitutions.
+   Shared `discovered`.
+   https://www.biorxiv.org/content/10.64898/2026.09.06.747930v1
+   ![fig](https://www.biorxiv.org/content/biorxiv/early/2026/09/12/2026.09.06.747930/F1.large.jpg)
+
+5. **A massively parallel synthetic gene atlas for learning compact cis-regulatory grammar across cellular contexts** (first: Hagen; senior: Goodarzi; *bioRxiv*, 14 September 2026).
+   - A company (Therna) platform release — **"Chronos"** — measuring **~60,000 compact cis-regulatory elements across ~50 cell lines in one pooled experiment**, split into a 5'UTR/internal-promoter module and a 3'UTR stability module.
+   - The framing is deliberate: virtual-cell models learn cis regulation only from **endogenous genes inside broad native contexts**; synthetic genes with a **short, defined variable region** give a cleaner read of the code.
+   - Two delivery arms separate two layers of control — **episomal DNA delivery gives DNA-normalized mRNA output (transcriptional)**, while **direct delivery of N1-methylpseudouridine-modified mRNA with longitudinal sampling gives decay rates (post-transcriptional)**.
+   - Resolving 30,000-element libraries required **pushing single-cell RNA-seq to single-molecule quantification** — the scaling constraint worth noting for any sc-MPRA design.
+   - **Why it matters here:** the same measurement problem scMPRAforge models, at a scale and with a cross-cell-line design worth benchmarking against; and the "compact element" emphasis lines up with the current push in `#generomics` toward shorter, cargo-friendly synthetic CREs. ⚠ VERIFY: an industry preprint and platform announcement — read the claims with that in mind.
+   Shared `discovered`.
+   https://www.biorxiv.org/content/10.64898/2026.09.13.751267v1
+   ![fig](https://www.biorxiv.org/content/biorxiv/early/2026/09/14/2026.09.13.751267/F1.large.jpg)
+
+6. **An atlas of transcription factor cooperation reveals how motif readers shape regulatory output** (first: Xiong; senior: Wang; *bioRxiv*, 18 September 2026).
+   - Analyzes **1,552 TF binding datasets across 10 cell types**, testing competing mechanistic explanations for each TF–motif dependency against multi-omic data rather than assuming the canonical assignment.
+   - The dependencies resolve into **three routes: direct sequence recognition, protein-mediated recruitment or exclusion, and regulatory context**.
+   - The load-bearing result: a motif's predictive power was attributable to its **"canonical" TF in only about one third of resolved cases**, and those canonical TFs were often **barely expressed** in the cell type where the motif mattered.
+   - **Motif similarity tracked regulatory-region type but not transcriptional outcome**; **reader identity tracked both** — so the protein interpreting the motif, not the motif label, predicts what happens.
+   - Perturbation checks back this up: knocking down an inferred reader **dropped target-TF occupancy in proportion to the reader's prior binding**, and a natural variant disrupting the predictive motif propagated through every step of the inferred mechanism.
+   - **Why it matters here:** motif-based interpretation of MPRA and model attributions routinely names the canonical TF; this says that attribution is wrong roughly two thirds of the time. A caution for how we read Malinois/MPAC motif explanations, and a reason to condition motif calls on cell-type TF expression. ⚠ Figures were not yet rendered on bioRxiv at retrieval time, so no image.
+   Shared `discovered`.
+   https://www.biorxiv.org/content/10.64898/2026.09.14.751590v1
+
+7. **Identifying putative pathogenic non-coding variants in unresolved rare disease patients using topologically associated domains** (first: Gacita; senior: Grant; *bioRxiv*, 20 September 2026).
+   - Targets the diagnostic gap directly: **at least 50% of rare-disease patients remain unresolved after exome/genome sequencing**, and a share of the missing diagnoses are non-coding variants that WGS detects but nobody interprets.
+   - **GAVURD** takes **trio WGS alignments**, calls de novo and rare inherited variants, then **links each variant to disease genes via TAD membership** rather than nearest-gene, and ranks by phenotypic overlap with the proband.
+   - Proof of concept on **ten unresolved probands implicated six potentially causal non-coding variants**, each on a confluence of evidence rather than a single score.
+   - The honest limit is that TAD-based gene assignment is coarse — it bounds the search space but does not establish the element–gene link, which is where functional follow-up has to come in.
+   - **Why it matters here:** this is the upstream half of the GREGoRi U01 logic — a systematic shortlist generator whose output is exactly what an MPRA or CRISPRi follow-up should be pointed at. Worth reading alongside the AlphaGenome-Atlas rare-disease use case from two weeks ago, which solves the same problem with a model rather than with topology. ⚠ Figures were not yet rendered on bioRxiv at retrieval time, so no image.
+   Shared `discovered`.
+   https://www.biorxiv.org/content/10.64898/2026.09.17.752339v1
+
+---
+
 ## Week of 2026-09-13
 
 1. **Predicting genome-wide functional constraints with GPN-Star** (first: Ye; senior: Song; *Nature*, 09 September 2026).
