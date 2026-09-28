@@ -7,6 +7,94 @@ Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#joint-jax-
 
 ---
 
+## Week of 2026-09-27
+
+1. **The gene-regulatory evolution of the human skeleton** (first: Yan; senior: Gokhman; *Nature*, 23 September 2026).
+   - An MPRA screen of **561,410 human-derived substitutions** in regulatory elements, identifying **15,077 with human-specific activity** — a scale that makes this the reference dataset for human-derived regulatory change, not a candidate-locus study.
+   - Paired with **human–ape hybrid cells**, which control for trans background and isolate cis effects; these showed **widespread downregulation of glycosaminoglycan (GAG) biosynthesis genes**.
+   - The molecular signal is corroborated at the tissue level: human cartilage shows a **three- to fourfold reduction in joint GAG content** versus non-human apes, consistent **across eight joint types** — a rare case of MPRA output matching a measured physiological phenotype.
+   - The GAG pathway carries **signatures of selection**, concentrated in chondroitin sulfate biosynthesis, and the ***ACAN* GAG anchor repeats expanded uniquely in humans in two pulses** — two independent lines of evidence that this was selected, not drift.
+   - The framing is a trade-off: reduced GAG aligns with human-specific skeletal morphology **and** with elevated susceptibility to degenerative joint disease such as osteoarthritis.
+   - **Why it matters here:** this is the closest external analogue to the lab's own archaic/modern 3′UTR work — same logic (assay human-derived regulatory variants at scale, then find the pathway), but on coding-adjacent skeletal biology, and it demonstrates the hybrid-cell cis/trans control as a complement to MPRA. Directly relevant to `archaic-3utr-mpra` and a useful precedent for how to land a human-specific-regulation story in a general journal.
+   Shared `#interesting_papers`.
+   https://www.nature.com/articles/s41586-026-11053-x
+   ![fig](https://media.springernature.com/m685/springer-static/image/art%3A10.1038%2Fs41586-026-11053-x/MediaObjects/41586_2026_11053_Fig1_HTML.png)
+
+2. **Massively parallel assessment of gene regulatory activity at human cortical-structure-associated variants** (first: Matoba; senior: Stein; *Nature Neuroscience*, 23 September 2026).
+   - MPRA over **9,092 cortical-structure-associated variants in human neural progenitor cells** — the relevant cell state for cortical surface area, rather than a convenient immortalized line.
+   - **918 variants across 150 loci showed regulatory activity (76% of loci tested)**, and **more than half showed allelic effects** — a high hit rate that argues the GWAS signal for brain structure is substantially regulatory.
+   - The mechanistic surprise: **Alu elements drove most of the activity**, specifically **younger Alus retaining intact RNA Pol III A/B box promoter elements** — a transposable-element origin for cortical regulatory variation.
+   - **Wnt stimulation changed regulatory activity at a subset of loci**, i.e. condition-dependent enhancers that a single-condition MPRA would score as inert — a direct argument for assaying perturbed states.
+   - Regional specificity was explained by **transcription-factor expression**: variants disrupting a TF's binding site had stronger effects in brain regions expressing that TF more highly.
+   - **CRISPRi validation at the *FOXO3* locus** tied the regulatory effect to cortical surface area, closing the loop from reporter to phenotype.
+   - **Why it matters here:** this is `brain-celltype-mpra`'s nearest neighbour and a template for the MIND Prize logic — measure a cell state, find the state-dependent elements. The Wnt-dependence result in particular supports assaying **resting vs activated** states rather than one condition, which is exactly the homeostatic-vs-DAM design.
+   Shared `#interesting_papers`.
+   https://www.nature.com/articles/s41593-026-02454-2
+   ![fig](https://media.springernature.com/m685/springer-static/image/art%3A10.1038%2Fs41593-026-02454-2/MediaObjects/41593_2026_2454_Fig1_HTML.png)
+
+3. **Mapping and rewiring the MYBPC3 promoter for rescue of haploinsufficiency driven hypertrophic cardiomyopathy** (first: Renberg; senior: Helms; *bioRxiv*, 22 September 2026).
+   - **Saturation mutagenesis MPRA in human iPSC-derived cardiomyocytes** across the *MYBPC3* promoter, mapping the essential regulatory elements and the noncoding loss-of-function variants within them.
+   - The therapeutic inversion is the interesting part: rather than correcting the mutant allele, they **engineer the promoter to raise expression of the remaining wild-type allele** — treating haploinsufficiency as a dosage problem solvable in *cis*.
+   - Screening **thousands of sequence and TF-binding-site combinations** identified **synergistic edits** that robustly increase expression, i.e. the gains were combinatorial rather than additive single-site effects.
+   - Presented as a **generalizable strategy for haploinsufficient disease**, not a one-locus result.
+   - **Why it matters here:** this is promoter *engineering as therapy* with a Kundaje/Engreitz/Kitzman methods stack — the same design space as `locium-synthetic-promoters` and the MIND Prize Aim 1, but tuning a natural promoter instead of writing one de novo. The synergy finding is a caution for any additive model of designed elements.
+   Shared `discovered`.
+   https://www.biorxiv.org/content/10.64898/2026.09.20.752987v1
+   ![fig](https://www.biorxiv.org/content/biorxiv/early/2026/09/22/2026.09.20.752987/F1.large.jpg)
+
+4. **A single-nucleus multi-omic atlas of gene regulation across 21 adult human tissues** (first: Fan; senior: Ardlie; *bioRxiv*, 27 September 2026).
+   - Joint transcriptome + chromatin accessibility on **459,856 single-nucleus profiles, 21 tissues, 4 donors**, resolved into **9 lineages, 61 broad cell types and 313 subclusters**.
+   - Catalogues **>1 million candidate cis-regulatory elements, of which 161,270 were previously unidentified** — the incremental discovery is concentrated in cell types that bulk and single-modality atlases under-sample.
+   - Links elements to genes with **871,177 cCRE–gene associations**, and uses these to **train predictive models of variant effect** — the atlas is built as model training data, not just a browser resource.
+   - From the GTEx group, so tissue sampling and donor metadata are aligned with existing GTEx eQTL resources.
+   - **Why it matters here:** a ready-made, cell-type-resolved training and evaluation substrate for `mpac` and for cross-species ATAC modelling — and the cCRE–gene links are the kind of ground truth that MPAC-style predictions are scored against. Worth checking the microglia/brain subclusters against the MIND Prize plan.
+   - ⚠ Figures were **not yet rendered on bioRxiv** at retrieval time (posted one day before this run) — no `![fig]`; re-check on a later run.
+   Shared `discovered`.
+   https://www.biorxiv.org/content/10.64898/2026.09.25.754561v1
+
+5. **Genetic background shapes AI-predicted variant effects** (first: Schilder; senior: Koo; *bioRxiv*, 7 April 2026).
+   - Introduces **pVEP (personalized variant effect predictor)** and asks a question most benchmarks skip: does the *same* variant get the *same* prediction on a different haplotype background?
+   - Scale: ~**85,000 missense, splice-altering and UTR variants** evaluated across **3,891 human genomes** and millions of haplotypes, using deep-learning effect predictors.
+   - The headline result is a reproducibility problem for variant annotation: **many clinical variants are predicted pathogenic on some genetic backgrounds and benign on others** — the prediction is a property of the haplotype, not the variant.
+   - Mechanisms are named rather than left as noise: **shifts in protein contacts** and **changes in splice-site recognition** account for much of the background dependence.
+   - The equity consequence is explicit — background-dependent annotation matters most for **genetically diverse populations**, who are furthest from the reference haplotype the models were tuned on.
+   - **Why it matters here:** the protein-coding mirror of last week's Kreevan/Org non-additivity result, and the same warning for `mpac` and for ClinVar VUS work — a model scored on reference + single alternate allele is answering a narrower question than the clinical one. Note this is an **April preprint** surfaced by the lab this week, not a new posting.
+   Shared `#interesting_papers`.
+   https://www.biorxiv.org/content/10.64898/2026.04.04.715328v1
+   ![fig](https://www.biorxiv.org/content/biorxiv/early/2026/04/07/2026.04.04.715328/F1.large.jpg)
+
+6. **Autism genes converge on three functional programs organized by neuronal subclass, developmental timing, and cortical patterning** (first: Smith; senior: Gandal; *bioRxiv*, 24 September 2026).
+   - Takes **253 autism-associated genes** and asks where in neurodevelopment they actually act, rather than stopping at the gene list.
+   - Genetic burden **concentrates in temporally-resolved neuronal subclasses** — newborn excitatory neurons, immature interneurons, and maturing intratelencephalic lineages — so the signal is a developmental *window*, not a cell type alone.
+   - Convergence onto **three programs**: gene regulation, neuronal morphogenesis, and synaptic transmembrane signalling, with **MEF2C, SOX11 and FOXP2** as regulatory hubs.
+   - Risk genes show an **anterior-to-posterior cortical expression gradient anchored in visual cortex**, and clinical severity tracks the pattern of excitatory-neuron involvement.
+   - **Why it matters here:** the gene-regulation program is the entry point for MPRA/CODA work in neural cell types, and the named TF hubs are concrete motif targets. Also directly adjacent to the somatic-mosaicism/ASD strand of the K99.
+   Shared `discovered`.
+   https://www.biorxiv.org/content/10.64898/2026.09.22.753508v2
+   ![fig](https://www.biorxiv.org/content/biorxiv/early/2026/09/23/2026.09.22.753508/F1.large.jpg)
+
+7. **Targeted single-nucleus sequencing of 39,800 neurons reveals extensive low-frequency somatic variants** (first: Bidhan; senior: Rademakers; *bioRxiv*, 23 September 2026).
+   - **Single-nucleus amplicon sequencing of 39,800 neurons** from superior temporal gyrus, FTLD-TDP type C versus controls — depth chosen to reach mutation frequencies bulk sequencing cannot see.
+   - Finds an extensive landscape of **ultra-low-frequency (<1%) somatic mutations** across FTLD-TDP-associated genes, with ***TARDBP* carrying the highest proportion of mutation-bearing neurons**.
+   - Two counterintuitive observations drive the interpretation: somatic burden **decreased with age at death**, and the **C-terminal domain showed *lower* mutational frequency than other regions** despite being the disease-relevant domain.
+   - The authors' resolution is selective loss — **neurons carrying damaging mutations are progressively lost before autopsy**, so what survives to be sequenced is a depleted, biased sample. That reframes any cross-sectional somatic-burden estimate in post-mortem brain.
+   - **Why it matters here:** methodologically the closest published analogue to the somatic-mosaicism arm of the K99, and the survivorship-bias argument is one the K99 will need to address directly in its own design.
+   Shared `discovered`.
+   https://www.biorxiv.org/content/10.64898/2026.09.21.753260v1
+   ![fig](https://www.biorxiv.org/content/biorxiv/early/2026/09/23/2026.09.21.753260/F1.large.jpg)
+
+8. **Reference genomes and fossils revise bat family phylogeny and biogeography** (first: Morales; senior: Teeling; *Nature*, 23 September 2026).
+   - **Chromosome-level long-read assemblies for 103 bat species, 42 of them new, covering all 21 bat families** — the assembly-quality jump is what lets the phylogeny be revised rather than re-litigated.
+   - Resolves contested relationships: **Myzopodidae as the earliest branch within Vespertilionoidea**, and **Emballonuroidea and Vespertilionoidea as sister groups**; reconstructs **26 ancestral bat chromosomes**.
+   - Explains *why* earlier studies disagreed — a **mosaic evolutionary history** across the genome, meaning single-locus or low-coverage approaches were sampling conflicting histories.
+   - Integrating **699 morphological characters across 65 species including 44 pre-Quaternary fossils** with neutrally evolving genomic sites, fossilized birth–death and dispersal–extinction analyses place **bat origins — and thus powered flight — in Europe in the late Palaeocene**, refuting African and North American origins.
+   - **Why it matters here:** shared in the Longevity Consortium channel as a consortium output. Beyond the phylogeny, this is a substantially upgraded comparative substrate for cross-species regulatory modelling — the kind of alignment backbone `#atac_prediction` and the Zoonomia-style work depend on, in a clade central to the longevity portfolio. **Not a Reilly-lab paper** — Reilly is not an author.
+   Shared `#longevity-consortium_p2_internal`.
+   https://www.nature.com/articles/s41586-026-11007-3
+   ![fig](https://media.springernature.com/m685/springer-static/image/art%3A10.1038%2Fs41586-026-11007-3/MediaObjects/41586_2026_11007_Fig1_HTML.png)
+
+---
+
 ## Week of 2026-09-20
 
 1. **Massively parallel characterization reveals context-dependent and non-additive regulatory effects of closely spaced variant pairs** (first: Kreevan; senior: Org; *bioRxiv*, 11 September 2026).
