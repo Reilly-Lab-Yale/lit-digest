@@ -3,7 +3,100 @@
 A weekly scan of new and exciting papers, synthesized for your easy digestion. Just drop a paper in
 slack or email it to me as a suggestion and it will get in here.
 
-Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#joint-jax-yale` `#longevity-consortium` `#talks` `#xspecies-modeling` `#ukbb_crispri` `lab DM` `discovered`
+Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#immune_mpra` `#joint-jax-yale` `#longevity-consortium` `#talks` `#xspecies-modeling` `#ukbb_crispri` `lab DM` `discovered`
+
+---
+
+## Week of 2026-10-04
+
+1. **Single-allele nanoscale mapping of regulatory variants** (first: Hamley; senior: Davies; *Nature Genetics*, 2 October 2026).
+   - Introduces **MCCv**, a Micro Capture-C variant-to-function platform that reads **chromatin structure one allele at a time**, so a heterozygote becomes its own internal control rather than two genotypes compared across samples.
+   - Because reads are phased, MCCv links a cis-regulatory variant to **allelically imbalanced expression of its target gene** in the same cells — the step that usually requires a separate eQTL cohort.
+   - Applied to **405 cis-regulatory elements** implicated in immune-mediated inflammatory disease in **CD4+ T cells**, i.e. a disease-relevant primary cell type, not a convenient line.
+   - The headline mechanism is a **gain of function**: a risk allele **creates a neo-CTCF motif** that blocks super-enhancer contact with the *SESN3* promoter. Most non-coding mechanisms are framed as loss of binding; this is the inverse, and insulation rather than activation is the effector.
+   - Downstream biology is closed out: **SESN3 senses tryptophan to regulate mTOR**, with mouse models supporting a role in autoimmunity.
+   - They also **read out variant effects on contacts directly after genome editing**, making the assay a validation step as well as a discovery one.
+   - **Why it matters here:** this is the structural complement to what MPRA measures. MPRA scores an element's intrinsic activity; MCCv asks whether the variant changes *which promoter that element talks to*. For `mpac` and the UKBB CRISPRi work, a variant that is MPRA-null but contact-altering is exactly the class we would currently miss — worth considering as an orthogonal follow-up assay on emVar-negative but CRISPRi-positive elements.
+   Shared `#interesting_papers`.
+   https://www.nature.com/articles/s41588-026-02776-8
+   ![fig](https://media.springernature.com/m685/springer-static/image/art%3A10.1038%2Fs41588-026-02776-8/MediaObjects/41588_2026_2776_Fig1_HTML.png)
+
+2. **Population-scale immune multiome atlas reveals regulatory disease mechanisms** (first: Kanai; senior: Xavier; *Nature*, 30 September 2026).
+   - Paired **snATAC-seq + snRNA-seq on 10 million PBMCs from 1,108 Finnish individuals** — the point is that both modalities are measured *in the same nuclei at population scale*, so chromatin and expression effects can be chained rather than correlated across cohorts.
+   - Yields **51,083 cis-eQTLs (20,829 genes), 338,100 cis-caQTLs (210,584 peaks), 119,094 putative causal variants and 593,765 peak–gene links**.
+   - The central result is a **cascade argument**: variants that complete the chromatin→expression chain show **twice the disease colocalization** of variants with chromatin-only effects. Accessibility change alone is a weak predictor of phenotype; transmission to expression is what matters.
+   - **MPRA validated 10,428 fine-mapped molecular QTLs** — one of the largest reporter-assay validation sets attached to a QTL study, and a strong external precedent for using MPRA as the arbiter rather than the discovery engine.
+   - At **evolutionarily constrained genes** they find **regulatory buffering**: accessibility shifts are normal in size, but expression barely moves, because the gene is served by **more numerous, individually weaker enhancer–gene links**. Redundancy, not insensitivity.
+   - **Why it matters here:** the buffering result reframes a problem the lab keeps hitting — why strong CRISPRi/accessibility hits so often fail to move expression. It predicts that constrained genes need *combinatorial* perturbation, which bears directly on the UKBB CRISPRi design and on how `mpac` should weight constraint. The 10,428 MPRA-validated QTLs are also an immediately usable external benchmark set.
+   Shared `#immune_mpra`.
+   https://www.nature.com/articles/s41586-026-11078-2
+   ![fig](https://media.springernature.com/m685/springer-static/image/art%3A10.1038%2Fs41586-026-11078-2/MediaObjects/41586_2026_11078_Fig1_HTML.png)
+
+3. **Massively parallel characterization of common genetic risk variants for mental health disorders in glutamatergic neurons** (first: Fischer; senior: Schulte; *European Neuropsychopharmacology*, October 2026).
+   - MPRA of **psychiatric GWAS risk variants** (schizophrenia, bipolar disorder, ADHD, autism) assayed in **human iPSC-derived NGN2-induced glutamatergic neurons**.
+   - The design choice worth noting is the cell state: NGN2 induction gives a reasonably homogeneous excitatory-neuron population quickly, trading developmental fidelity for scale and reproducibility in a variant screen.
+   - Framing is the standard one for this field — thousands of associated variants, overwhelmingly non-coding, with unresolved function — but the assay is being applied to a cell type where psychiatric heritability is actually enriched.
+   - ⚠ This is a **conference abstract** (ECNP, vol. 111:113125), not a full paper — numbers of variants tested, hit rates and validation are not yet public, and no figure exists. Treat as a signal of what is coming rather than a result to cite.
+   - **Why it matters here:** closest external neighbour to `brain-celltype-mpra` and to the MIND Prize framing, and Steve flagged it in channel as data the lab would want. Worth tracking to the full preprint and, if the data become available, benchmarking against our own neuronal MPRA hits.
+   Shared `#interesting_papers`.
+   https://doi.org/10.1016/j.euroneuro.2026.113125
+
+4. **Scalable saturation mutagenesis reveals gene regulatory architecture and rare variant effects** (first: Yuan; senior: Kelley; *bioRxiv*, 30 September 2026).
+   - **Multi-ISM** reframes in-silico saturation mutagenesis as a **sparse recovery problem**: instead of scoring one mutation per forward pass, it mutates many positions at once and deconvolves the individual contributions.
+   - The efficiency claim is the whole point — **~45× fewer model evaluations** than exhaustive single-variant ISM, while **matching or exceeding** its accuracy on variant-effect benchmarks. Exhaustive ISM costs millions of passes per gene and billions-to-trillions genome-wide, which is why nobody runs it at scale.
+   - **Architecture-agnostic**: it transfers across long-context sequence-to-function models rather than being tuned to one (relevant given how fast the Enformer→Borzoi→AlphaGenome lineage is moving).
+   - Applied to **5,000 protein-coding genes including 3,317 OMIM disease genes**, producing **base-pair-resolution, tissue-resolved attribution maps over 500-kb windows** that supported enhancer–gene prioritization and cell-type-specific element calls.
+   - A clean negative-control-style finding: **more constrained genes had smaller predicted mutational effects** — which is either real buffering (cf. the Kanai atlas above) or a model artifact, and the paper does not fully separate those.
+   - Aggregating predictions into **gene-level rare-variant burdens** improved personalized expression prediction over a common-variant elastic net, **with the largest gains at expression outliers**.
+   - ⚠ Figures not yet rendered on bioRxiv at retrieval time (posted days before this run) — no `![fig]`; re-check next run.
+   - **Why it matters here:** Grace's AlphaGenome→MPRA fine-tuning and `malinois-coda` both live downstream of "how do we interrogate a trained CRE model cheaply enough to be useful". Multi-ISM is a drop-in that would make saturation-style interpretation of our own fine-tuned models routine rather than a one-off compute project. Caveat: everything here is *in silico* — no reporter data anywhere in the paper.
+   Shared `discovered`.
+   https://www.biorxiv.org/content/10.64898/2026.09.30.755794v1
+
+5. **Phenotypes of ultra-rare variant carriers benchmark variant effect scores** (first: Londhe; senior: Gagneur; *bioRxiv*, 1 October 2026).
+   - **UKBBGym** benchmarks coding and non-coding variant scores against **plasma protein abundance and quantitative traits in UK Biobank carriers of ultra-rare variants** — a phenotype-grounded ground truth rather than clinical pathogenicity labels.
+   - The methodological argument is about **what the benchmark is free of**: no ascertainment bias from curated clinical labels, no physiological mismatch from a cell-line assay, and no confounding from common-variant associations. Ultra-rare carriers give near-independent observations.
+   - Headline result, and an uncomfortable one for this field: **scores built for coding and splicing variants correlate more strongly with protein abundance and quantitative traits than scores modelling transcriptional regulation**.
+   - Second uncomfortable result: **experimental assays do not consistently beat computational scores** for missense effects — relevant to how much weight an MPRA-style readout should carry as "validation".
+   - Comparing **captured versus detectable variance** shows substantial headroom, concentrated in **indels and loss-of-function variants**.
+   - For coding variants the benchmark is **reproducible from public summary statistics**, which matters for whether anyone outside UKBB access can actually use it.
+   - ⚠ Figures not yet rendered on bioRxiv at retrieval time — no `![fig]`; re-check next run.
+   - **Why it matters here:** this is a benchmark `mpac` will eventually be scored on, and the regulatory-scores-underperform finding is the kind of result worth engaging with directly rather than around. Note the likely confound: plasma protein abundance is a readout biased toward coding and splicing mechanisms, so the comparison may be structurally unfair to regulatory predictors — which is itself an argument the lab is well placed to make. Hilary Finucane is a co-author, and a Siraj et al. co-author.
+   Shared `discovered`.
+   https://www.biorxiv.org/content/10.64898/2026.10.01.755962v1
+
+6. **Pangenome-resolved polymorphic transposable elements reveal human regulatory evolution in action** (first: Jiang; senior: Wang; *bioRxiv*, 24 September 2026).
+   - Nearly everything known about TE-derived regulatory function comes from **ancient, already-fixed insertions** — the survivors, scored long after selection finished. This paper goes after the **polymorphic phase**, before fixation or loss.
+   - The enabling resource is **231 haplotype-resolved human pangenomes with matched long-read multi-omics**, which lets segregating TE alleles be resolved **as sequences, as epigenetic states, and as transcript components** rather than scored present/absent.
+   - Origins of these alleles **extend beyond recent transposition** — so the polymorphic pool is not simply "new insertions".
+   - Regulatory consequences **depend on methylation state and transcript context**, and are **often missed by gene-level analyses** — a direct warning about the resolution at which TE effects are usually tested.
+   - The evolutionary claim: selection **favours element presence and absence alike**, so regulatory innovation before fixation is **a mixture of gain, remodeling and loss**, not one-way accumulation.
+   - ⚠ Figures not yet rendered on bioRxiv at retrieval time — no `![fig]`; re-check next run.
+   - **Why it matters here:** directly adjacent to `archaic-introgression` and the 3′UTR evolution work, and it supplies the segregating-TE allele set that an MPRA could test functionally — the obvious missing experiment in this paper is a reporter assay, which is what this lab does. Also relevant to the Matoba/Stein Alu result digested last week: two independent routes to "transposable elements are an active source of segregating regulatory variation".
+   Shared `#interesting_papers`.
+   https://www.biorxiv.org/content/10.64898/2026.09.24.754167v1
+
+7. **Denisovan introgression left differential selection regimes in Humans and Neanderthals on the SLC30A9 gene** (first: Garcia-Calleja; senior: Bosch; *bioRxiv*, 23 September 2026).
+   - Revisits a long-standing adaptive-introgression candidate: **rs1047626**, a highly differentiated non-synonymous variant in the zinc transporter *SLC30A9*, whose selected haplotype in out-of-Africa populations closely resembles the Denisovan sequence.
+   - The ambiguity it attacks is one the lab knows well — **archaic introgression versus retained ancient human variation**, and if archaic, **which archaic source**. Haplotype similarity alone cannot separate these.
+   - Method: **forward-in-time simulations of competing demographic scenarios, scored by Approximate Bayesian Computation coupled to machine learning** — a likelihood-free route to model choice where no tractable likelihood exists.
+   - The inferred history is non-obvious: a **Denisovan origin** for the allele, but introgressing **into Neanderthals first**, and reaching non-African modern humans **via Neanderthals** rather than directly.
+   - Derived-allele frequencies across **African populations are consistent with back-to-Africa migration**, rather than requiring independent origin.
+   - Selection is **strong in East Asian and other out-of-Africa populations**, but the inferred coefficient in Neanderthals is much weaker — the same allele under different regimes in different hosts.
+   - **Why it matters here:** a clean methodological template for `archaic-introgression` and `deepsweep2` — ABC-plus-ML for discriminating introgression scenarios is exactly the kind of model-choice problem the sim-vs-empirical harmonization work keeps running into. Note the limit: this is entirely inference from sequence, with **no functional assay** of the variant, which is the gap an MPRA fills.
+   Shared `discovered`.
+   https://www.biorxiv.org/content/10.64898/2026.09.23.753770v1
+   ![fig](https://www.biorxiv.org/content/biorxiv/early/2026/09/28/2026.09.23.753770/F1.large.jpg)
+
+8. **Function-preserving watermarking of AI-generated proteins** (first: Stutz; senior: Kohli; *Nature*, 30 September 2026).
+   - **SynthIDBio** embeds a detectable watermark into AI-generated protein **sequences** and **structures**, to establish provenance as generative design tools proliferate.
+   - The non-trivial constraint is **function preservation**: watermarked designed protein binders retained **binding affinity comparable to non-watermarked counterparts**, with near-perfect watermark detection.
+   - **SynthIDBio-structure** is a **fine-tuned AlphaFold3** model that embeds an imperceptible watermark into predicted biomolecular structures — watermarking the *prediction*, not only the design.
+   - Explicitly framed as proof-of-concept, motivated by **biosecurity and information-veracity** concerns rather than a current deployment.
+   - **Why it matters here:** off the usual watch-topics, but it sits on the question of provenance for *designed sequence* generally. The lab designs synthetic CREs with generative models (`locium-synthetic-promoters`, `malinois-coda`); if provenance norms arrive for proteins they will arrive for regulatory DNA too, and a watermark that must survive without perturbing measured activity is a strictly harder problem for a CRE than for a binder.
+   Shared `#interesting_papers`.
+   https://www.nature.com/articles/s41586-026-10965-y
+   ![fig](https://media.springernature.com/m685/springer-static/image/art%3A10.1038%2Fs41586-026-10965-y/MediaObjects/41586_2026_10965_Fig1_HTML.png)
 
 ---
 
@@ -48,9 +141,9 @@ Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#joint-jax-
    - Links elements to genes with **871,177 cCRE–gene associations**, and uses these to **train predictive models of variant effect** — the atlas is built as model training data, not just a browser resource.
    - From the GTEx group, so tissue sampling and donor metadata are aligned with existing GTEx eQTL resources.
    - **Why it matters here:** a ready-made, cell-type-resolved training and evaluation substrate for `mpac` and for cross-species ATAC modelling — and the cCRE–gene links are the kind of ground truth that MPAC-style predictions are scored against. Worth checking the microglia/brain subclusters against the MIND Prize plan.
-   - ⚠ Figures were **not yet rendered on bioRxiv** at retrieval time (posted one day before this run) — no `![fig]`; re-check on a later run.
    Shared `discovered`.
    https://www.biorxiv.org/content/10.64898/2026.09.25.754561v1
+   ![fig](https://www.biorxiv.org/content/biorxiv/early/2026/09/26/2026.09.25.754561/F1.large.jpg)
 
 5. **Genetic background shapes AI-predicted variant effects** (first: Schilder; senior: Koo; *bioRxiv*, 7 April 2026).
    - Introduces **pVEP (personalized variant effect predictor)** and asks a question most benchmarks skip: does the *same* variant get the *same* prediction on a different haplotype background?
