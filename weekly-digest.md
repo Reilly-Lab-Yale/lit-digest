@@ -7,6 +7,76 @@ Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#immune_mpr
 
 ---
 
+## Week of 2026-10-11
+
+1. **Systematic mapping of enhancers, silencers and topological elements with prime-editing deletion screens** (first: Cai; senior: Engreitz; *bioRxiv*, 9 October 2026).
+   - **Swap-seq** couples **pooled twin prime editing** to flow sorting, so hundreds of endogenous regulatory sequences are *deleted* — not silenced, not moved into a reporter — and the quantitative effect on a nearby gene is read out directly.
+   - The design point is **mechanistic class-agnosticism**: one assay scores enhancers, silencers and CTCF insulators in the same experiment, where CRISPRi conflates them and MPRA sees none of the topological ones.
+   - Applied to the regulatory landscape of **PPIF in THP-1 monocytes**, quantifying distal and intronic enhancers and characterising CTCF insulators in the native locus.
+   - The new biology is a **silencer acting through HDAC-mediated repression of neighbouring enhancers** — repression of the *elements*, not of the promoter. Hundreds of other loci share its chromatin signature and TF-binding profile, so the authors argue this is a class rather than a one-off.
+   - The benchmark result is the one to carry forward: sequence-to-function models **capture local element activity but fail to link elements to their distal target genes**. Local activity is learnable from sequence; wiring, so far, is not.
+   - ⚠ Figures not yet rendered on bioRxiv at retrieval time (posted days before this run) — no `![fig]`; re-check next run.
+   - **Why it matters here:** this is the cleanest external statement of the gap `mpac` sits in. Our MPRA scores intrinsic activity and the UKBB CRISPRi work scores element→gene effect; Swap-seq does both in one native-locus assay, and its silencer class is exactly the category an MPRA would call inactive and a CRISPRi screen would call a hit with the wrong sign. Worth deciding whether the lab wants a deletion-based arm alongside CRISPRi, and the model-benchmarking section is a direct test our own fine-tuned models should be run through.
+   Shared `discovered`.
+   https://www.biorxiv.org/content/10.64898/2026.10.08.756856v1
+
+2. **Cerberus: bidirectional state-space blocks improve accuracy and efficiency of regulatory sequence models** (first: Kelley; senior: Linder; *bioRxiv*, 9 October 2026).
+   - The framing argument is a data argument, not an architecture argument: **the reference genome caps the number of unique training sequences**, and new assays add labels rather than sequence. That asymmetry should favour architectures that extract more per sequence.
+   - Controlled swap: Borzoi's **transformer blocks replaced with Hydra**, a bidirectional state-space block built on Mamba-2, with the rest of the architecture and the training data held fixed — so the comparison is about the long-range block itself.
+   - Hydra blocks ran **5.7× faster on 8,192-token inputs** and improved both held-out coverage prediction and fine-mapped eQTL classification.
+   - Linear cost in sequence length let them run at **32 bp resolution and delete the U-net decoder** — the resulting convolution-SSM model is **both smaller and more accurate** than what it replaced. Removing a component and gaining accuracy is the strongest form of this result.
+   - Scaled up, **Cerberus** is an **ensemble of eight models over 786 kb of input**, beating Borzoi on **GTEx v11 fine-mapped eQTL, sQTL and paQTL** with negatives matched on allele frequency, gene expression and phenotype-specific positional annotation (**0.692 vs 0.668 mean eQTL AUPRC**).
+   - The negative-matching deserves attention independently of the model: most published variant-effect AUPRCs are inflated by unmatched negatives, and this is a usable recipe for not doing that.
+   - ⚠ Figures not yet rendered on bioRxiv at retrieval time — no `![fig]`; re-check next run.
+   - **Why it matters here:** Grace's AlphaGenome fine-tuning and `malinois-coda` both pay the attention tax at long context. A 5.7× cheaper long-range block at higher resolution changes what is affordable to fine-tune on MPRA data, and the matched-negative eQTL benchmark is a fairer scoreboard than the one we and others have been using.
+   Shared `discovered`.
+   https://www.biorxiv.org/content/10.64898/2026.10.02.756377v1
+
+3. **High-throughput identification of chromatin-opening transcription factors** (first: Keith; senior: Domcke; *bioRxiv*, 9 October 2026).
+   - Asks a question usually answered anecdotally: of **~1,600 mammalian TFs**, which ones, when newly expressed, actually **open closed chromatin** — and why only at some of their motif occurrences.
+   - Method avoids the usual overexpression artefact: **pooled CRISPRa on endogenous TFs to physiological levels** in mouse ES cells, rather than transgenic blasting. 240 developmental TFs screened for transcriptional response, 60 taken forward.
+   - Joint **gene expression + chromatin accessibility in ~140,000 single cells**, so opening and its transcriptional consequence are measured in the same nucleus.
+   - Two mechanistic classes fall out. **Solo openers** (e.g. **Cdx2, Sox10**) create accessibility on their own, and do so **preferentially at distal sites closed in mESCs that become cell-type-specific enhancers later in development** — the factor anticipates the enhancer.
+   - **Co-TF-dependent openers** need a partner: either by exploiting **pre-existing heterogeneity** in the mESC pool (↑Grhl1 only opens in Tfap2c+ cells, at dual-motif sites), or by **hierarchical activation** of a second factor. Same factor, different answer depending on what else is already on.
+   - ⚠ Figures not yet rendered on bioRxiv at retrieval time — no `![fig]`; re-check next run.
+   - **Why it matters here:** this is the missing variable in cell-type-specific synthetic CRE design. `malinois-coda` and the R61/R33 synthetic-DAM-CRE work choose motifs for a target cell type; this says whether a motif is usable depends on whether its TF can open chromatin there and on which co-factors are co-expressed. The solo-opener list is a short, concrete shortlist of motifs worth over-weighting in designs intended to work from a closed start.
+   Shared `discovered`.
+   https://www.biorxiv.org/content/10.64898/2026.10.07.757445v1
+
+4. **Expanding the DNA motif lexicon of the transcriptional regulatory code** (first: Fan; senior: Singh; *bioRxiv* v2, 10 October 2026).
+   - Target is **composite elements (CEs)** — stereospecific arrangements of simple motifs that sharpen DNA–protein specificity and carry combinatorial logic. Known to matter, systematically under-catalogued.
+   - Pairs genome-scale computational discovery (**CEseek**) with **custom MPRAs**, so a predicted CE is tested for activity rather than only for enrichment, with coincident/cooperative TF binding checked in vivo and in vitro.
+   - **GRACE**, a deep model trained on the MPRA data at **single-nucleotide resolution**, learns the CE lexicon and then **predicts activities of variants and of stereospecific CE configurations that were never built** — the generalisation claim that makes the lexicon useful rather than descriptive.
+   - Comparison against models trained on **chromatin accessibility** shows convergence on the same lexicon while separating **which motifs drive transcription from which drive accessibility** — two things routinely conflated in motif interpretation.
+   - The stated application is **CE-aware interpretation of disease-associated non-coding variants**: a variant can be motif-neutral in isolation and still break a composite arrangement.
+   - **Ryan Tewhey, Susan Kales and John Ray are co-authors**, so the MPRA design will be close to our own conventions and the data should be directly comparable.
+   - **Why it matters here:** a trained, MPRA-grounded model of motif *syntax* is what our emVar interpretation currently lacks — we read hits against single-motif PWMs. Running `mpac` emVars through a CE lens is a cheap reanalysis with a real chance of explaining allelic skews that no single motif disruption accounts for.
+   Shared `discovered`.
+   https://www.biorxiv.org/content/10.1101/2025.07.09.662874v2
+   ![fig](https://www.biorxiv.org/content/biorxiv/early/2025/07/15/2025.07.09.662874/F1.large.jpg)
+
+5. **STEER-seq: a recombinase-based platform for pooled multimodal single-cell perturbation screening** (first: Migliori; senior: Bassett; *bioRxiv*, 9 October 2026).
+   - The problem it fixes is one every lentiviral screen carries: **variable transgene copy number, integration site and genomic context** make quantitative comparison across perturbations unreliable.
+   - **Bxb1-mediated irreversible integration at a defined safe-harbour locus**, promoterless donor libraries, barcode-tracked perturbations — **single copy, one promoter, one genomic context**, virus-free, in human iPSCs.
+   - Biological proof: **SPI1 alone drove differentiation toward HSC/MPP-like progenitors with no exogenous cytokines**, and **transient** induction produced progenitors that kept multilineage potential — a dose/duration result that would be hard to trust with variable copy number.
+   - **Joint RNA + chromatin accessibility** readout let them reconstruct perturbation-induced gene regulatory networks, including a **RUNX2-driven osteoblast programme**.
+   - ⚠ Figures not yet rendered on bioRxiv at retrieval time — no `![fig]`; re-check next run.
+   - **Why it matters here:** directly relevant to the iPSC/NGN2 work in `#joint_jax_yale_ipsc` and `#ipscs`. Julio's note this week that **NGN2 lines are prone to differentiation and need extensive QC after sorting** is the same class of problem — landing-pad integration removes copy-number and position variance as a confounder, and is worth weighing against the current CRISPRi-machinery build for the cross-species lines.
+   Shared `discovered`.
+   https://www.biorxiv.org/content/10.64898/2026.10.08.757551v1
+
+6. **Fine-tuning genomic models on rare splicing events identifies a biomarker of TDP-43 pathology** (first: Martin-Linares; senior: Ling; *bioRxiv*, 9 October 2026).
+   - Tests a claim foundation models are usually granted rather than shown: that pretraining transfers to **rare, poorly annotated events**. The test case is **TDP-43 cryptic exons**, which are under-represented in standard annotation.
+   - Head-to-head: **AlphaGenome** against **OpenSpliceAI**, a task-specific splice model. Fine-tuned OpenSpliceAI recovered held-out cryptic exons in human and mouse and captured **allele-specific splicing at the disease-associated UNC13A locus**.
+   - The instructive failure: a prediction head on **AlphaGenome's frozen backbone failed outright**. Only **unfreezing and fine-tuning all weights** let it generalise — so the pretrained representation did not already contain the signal in a linearly readable form.
+   - Applied genome-wide, the fine-tuned model found new cryptic splicing in **CLDN11** and **ARHGAP23**, both **validated in FTLD-TDP brain tissue**; the CLDN11 event is predicted to make a **neoepitope usable as an oligodendrocyte-specific biomarker**.
+   - ⚠ Figures not yet rendered on bioRxiv at retrieval time — no `![fig]`; re-check next run.
+   - **Why it matters here:** a direct, cautionary data point for Grace's AlphaGenome→MPRA fine-tuning. Frozen-backbone probing is the cheap option and it failed here on a rare-event task; MPRA hits are also a rare, under-represented class relative to the pretraining distribution. The practical read: budget for full fine-tuning, and treat a weak frozen-feature baseline as uninformative about the model's ceiling rather than as evidence against it.
+   Shared `discovered`.
+   https://www.biorxiv.org/content/10.64898/2026.10.07.757366v1
+
+---
+
 ## Week of 2026-10-04
 
 1. **Single-allele nanoscale mapping of regulatory variants** (first: Hamley; senior: Davies; *Nature Genetics*, 2 October 2026).
@@ -48,10 +118,10 @@ Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#immune_mpr
    - Applied to **5,000 protein-coding genes including 3,317 OMIM disease genes**, producing **base-pair-resolution, tissue-resolved attribution maps over 500-kb windows** that supported enhancer–gene prioritization and cell-type-specific element calls.
    - A clean negative-control-style finding: **more constrained genes had smaller predicted mutational effects** — which is either real buffering (cf. the Kanai atlas above) or a model artifact, and the paper does not fully separate those.
    - Aggregating predictions into **gene-level rare-variant burdens** improved personalized expression prediction over a common-variant elastic net, **with the largest gains at expression outliers**.
-   - ⚠ Figures not yet rendered on bioRxiv at retrieval time (posted days before this run) — no `![fig]`; re-check next run.
    - **Why it matters here:** Grace's AlphaGenome→MPRA fine-tuning and `malinois-coda` both live downstream of "how do we interrogate a trained CRE model cheaply enough to be useful". Multi-ISM is a drop-in that would make saturation-style interpretation of our own fine-tuned models routine rather than a one-off compute project. Caveat: everything here is *in silico* — no reporter data anywhere in the paper.
    Shared `discovered`.
    https://www.biorxiv.org/content/10.64898/2026.09.30.755794v1
+   ![fig](https://www.biorxiv.org/content/biorxiv/early/2026/10/01/2026.09.30.755794/F1.large.jpg)
 
 5. **Phenotypes of ultra-rare variant carriers benchmark variant effect scores** (first: Londhe; senior: Gagneur; *bioRxiv*, 1 October 2026).
    - **UKBBGym** benchmarks coding and non-coding variant scores against **plasma protein abundance and quantitative traits in UK Biobank carriers of ultra-rare variants** — a phenotype-grounded ground truth rather than clinical pathogenicity labels.
@@ -60,10 +130,10 @@ Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#immune_mpr
    - Second uncomfortable result: **experimental assays do not consistently beat computational scores** for missense effects — relevant to how much weight an MPRA-style readout should carry as "validation".
    - Comparing **captured versus detectable variance** shows substantial headroom, concentrated in **indels and loss-of-function variants**.
    - For coding variants the benchmark is **reproducible from public summary statistics**, which matters for whether anyone outside UKBB access can actually use it.
-   - ⚠ Figures not yet rendered on bioRxiv at retrieval time — no `![fig]`; re-check next run.
    - **Why it matters here:** this is a benchmark `mpac` will eventually be scored on, and the regulatory-scores-underperform finding is the kind of result worth engaging with directly rather than around. Note the likely confound: plasma protein abundance is a readout biased toward coding and splicing mechanisms, so the comparison may be structurally unfair to regulatory predictors — which is itself an argument the lab is well placed to make. Hilary Finucane is a co-author, and a Siraj et al. co-author.
    Shared `discovered`.
    https://www.biorxiv.org/content/10.64898/2026.10.01.755962v1
+   ![fig](https://www.biorxiv.org/content/biorxiv/early/2026/10/02/2026.10.01.755962/F1.large.jpg)
 
 6. **Pangenome-resolved polymorphic transposable elements reveal human regulatory evolution in action** (first: Jiang; senior: Wang; *bioRxiv*, 24 September 2026).
    - Nearly everything known about TE-derived regulatory function comes from **ancient, already-fixed insertions** — the survivors, scored long after selection finished. This paper goes after the **polymorphic phase**, before fixation or loss.
@@ -71,10 +141,10 @@ Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#immune_mpr
    - Origins of these alleles **extend beyond recent transposition** — so the polymorphic pool is not simply "new insertions".
    - Regulatory consequences **depend on methylation state and transcript context**, and are **often missed by gene-level analyses** — a direct warning about the resolution at which TE effects are usually tested.
    - The evolutionary claim: selection **favours element presence and absence alike**, so regulatory innovation before fixation is **a mixture of gain, remodeling and loss**, not one-way accumulation.
-   - ⚠ Figures not yet rendered on bioRxiv at retrieval time — no `![fig]`; re-check next run.
    - **Why it matters here:** directly adjacent to `archaic-introgression` and the 3′UTR evolution work, and it supplies the segregating-TE allele set that an MPRA could test functionally — the obvious missing experiment in this paper is a reporter assay, which is what this lab does. Also relevant to the Matoba/Stein Alu result digested last week: two independent routes to "transposable elements are an active source of segregating regulatory variation".
    Shared `#interesting_papers`.
    https://www.biorxiv.org/content/10.64898/2026.09.24.754167v1
+   ![fig](https://www.biorxiv.org/content/biorxiv/early/2026/09/30/2026.09.24.754167/F1.large.jpg)
 
 7. **Denisovan introgression left differential selection regimes in Humans and Neanderthals on the SLC30A9 gene** (first: Garcia-Calleja; senior: Bosch; *bioRxiv*, 23 September 2026).
    - Revisits a long-standing adaptive-introgression candidate: **rs1047626**, a highly differentiated non-synonymous variant in the zinc transporter *SLC30A9*, whose selected haplotype in out-of-Africa populations closely resembles the Denisovan sequence.
@@ -249,18 +319,20 @@ Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#immune_mpr
    - The load-bearing result: a motif's predictive power was attributable to its **"canonical" TF in only about one third of resolved cases**, and those canonical TFs were often **barely expressed** in the cell type where the motif mattered.
    - **Motif similarity tracked regulatory-region type but not transcriptional outcome**; **reader identity tracked both** — so the protein interpreting the motif, not the motif label, predicts what happens.
    - Perturbation checks back this up: knocking down an inferred reader **dropped target-TF occupancy in proportion to the reader's prior binding**, and a natural variant disrupting the predictive motif propagated through every step of the inferred mechanism.
-   - **Why it matters here:** motif-based interpretation of MPRA and model attributions routinely names the canonical TF; this says that attribution is wrong roughly two thirds of the time. A caution for how we read Malinois/MPAC motif explanations, and a reason to condition motif calls on cell-type TF expression. ⚠ Figures were not yet rendered on bioRxiv at retrieval time, so no image.
+   - **Why it matters here:** motif-based interpretation of MPRA and model attributions routinely names the canonical TF; this says that attribution is wrong roughly two thirds of the time. A caution for how we read Malinois/MPAC motif explanations, and a reason to condition motif calls on cell-type TF expression.
    Shared `discovered`.
    https://www.biorxiv.org/content/10.64898/2026.09.14.751590v1
+   ![fig](https://www.biorxiv.org/content/biorxiv/early/2026/09/18/2026.09.14.751590/F1.large.jpg)
 
 7. **Identifying putative pathogenic non-coding variants in unresolved rare disease patients using topologically associated domains** (first: Gacita; senior: Grant; *bioRxiv*, 20 September 2026).
    - Targets the diagnostic gap directly: **at least 50% of rare-disease patients remain unresolved after exome/genome sequencing**, and a share of the missing diagnoses are non-coding variants that WGS detects but nobody interprets.
    - **GAVURD** takes **trio WGS alignments**, calls de novo and rare inherited variants, then **links each variant to disease genes via TAD membership** rather than nearest-gene, and ranks by phenotypic overlap with the proband.
    - Proof of concept on **ten unresolved probands implicated six potentially causal non-coding variants**, each on a confluence of evidence rather than a single score.
    - The honest limit is that TAD-based gene assignment is coarse — it bounds the search space but does not establish the element–gene link, which is where functional follow-up has to come in.
-   - **Why it matters here:** this is the upstream half of the GREGoRi U01 logic — a systematic shortlist generator whose output is exactly what an MPRA or CRISPRi follow-up should be pointed at. Worth reading alongside the AlphaGenome-Atlas rare-disease use case from two weeks ago, which solves the same problem with a model rather than with topology. ⚠ Figures were not yet rendered on bioRxiv at retrieval time, so no image.
+   - **Why it matters here:** this is the upstream half of the GREGoRi U01 logic — a systematic shortlist generator whose output is exactly what an MPRA or CRISPRi follow-up should be pointed at. Worth reading alongside the AlphaGenome-Atlas rare-disease use case from two weeks ago, which solves the same problem with a model rather than with topology.
    Shared `discovered`.
    https://www.biorxiv.org/content/10.64898/2026.09.17.752339v1
+   ![fig](https://www.biorxiv.org/content/biorxiv/early/2026/09/20/2026.09.17.752339/F1.large.jpg)
 
 ---
 
