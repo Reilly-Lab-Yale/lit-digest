@@ -3,7 +3,92 @@
 A weekly scan of new and exciting papers, synthesized for your easy digestion. Just drop a paper in
 slack or email it to me as a suggestion and it will get in here.
 
-Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#immune_mpra` `#joint-jax-yale` `#longevity-consortium` `#talks` `#xspecies-modeling` `#ukbb_crispri` `lab DM` `discovered`
+Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#immune_mpra` `#joint-jax-yale` `#longevity-consortium` `#zoonomia-p` `#talks` `#xspecies-modeling` `#ukbb_crispri` `lab DM` `discovered`
+
+---
+
+## Week of 2026-10-25
+
+1. **Reconstructing human gene regulatory evolution using deep learning** (first: Yamada; senior: Kaessmann; *bioRxiv*, 23 October 2026).
+   - Attacks the oldest problem in human regulatory evolution with the one thing that was always missing: **functional data for lineages you cannot assay**. Great-ape CRE data is scarce and extinct-hominin data is impossible, so the field has been stuck inferring function from conservation.
+   - The move is to **substitute a model for the missing experiment**: AlphaGenome predicts cis-regulatory effects for **~17 million single-nucleotide substitutions specific to the human lineage**, across **305 tissues and cell types**.
+   - The headline number is **71,345 predicted cis-regulatory gains**, and critically they **lie mostly outside human accelerated regions** — the HAR-centric view of human regulatory novelty is capturing only a slice.
+   - Mechanistically the gains split two ways, and the **more common route is co-option**: a CRE already accessible in some *other* tissue gets recruited, rather than a brand-new element arising from scratch. Gains are enriched for **distal enhancers** and for target-gene functions matching the tissue — the signal is tissue-coherent, not scattered.
+   - The causal claim is tested, not asserted: genes linked to more gains are **more likely to be upregulated in humans**, and **in silico reversion to ancestral alleles** traces individual upregulations back to **single substitutions that create TF binding motifs**.
+   - The archaic comparison is the sharpest result: against Neandertal and Denisovan genomes, **nearly all gains now fixed in humans predate the archaic split** — yet **a few modern-human-specific gains contribute disproportionately** to upregulation. Most of "human" regulatory evolution is actually hominin regulatory evolution.
+   - **Why it matters here:** this is the paper `archaic-introgression` and `xspecies-modeling` would have written with a model instead of an assay, and it is a direct precedent for using a sequence-to-function model as the primary evidence rather than a prioritisation step. It also sets up the obvious MPRA test — the in-silico reversions that create a motif are exactly the constructs we can build and measure.
+   - ⚠ Figure not yet rendered on bioRxiv (posted 3 days ago); re-check next run.
+   Shared `#zoonomia-p`.
+   https://www.biorxiv.org/content/10.64898/2026.10.22.760916v1
+
+2. **Predicting cell-state-specific gene regulation from DNA across species** (first: Liu; senior: Greenberg; *bioRxiv*, 20 October 2026).
+   - States the field's split cleanly: **sequence-to-function models read DNA but treat cell state as a fixed categorical label**, while single-cell foundation models represent cell state but never see sequence. Neither can answer "what does this sequence do in *this* cell right now."
+   - **Bolero** closes the gap by **conditioning model parameters on atlas-scale cell-state embeddings** (plus other biological variables) to predict accessibility and transcript abundance from DNA — cell state becomes a continuous input, not a one-hot column.
+   - Scale is the enabling ingredient: **10.7 million cells, 33 datasets, six mammals**.
+   - The payoff is resolution between *near* states — it separates **cortical regional and developmental gradients**, the distinctions a fixed-label model collapses by construction.
+   - The most useful property for us: **extrapolating the cell-state embedding predicts states absent from training**, and an **AP-1 activity score as a continuous conditioning axis** predicts activity-regulated chromatin changes **without any stimulation data**. It also reconstructs the **cooperative grammar of AP-1 motif identity and spacing**, and generalises to **species held out of training**.
+   - **Why it matters here:** this is the most direct methodological competitor-and-template for `xspecies-modeling`, and it reframes a question Erin is actively working — held-out-species performance — as a conditioning problem rather than a retraining problem. Cell-state conditioning is also exactly what `brain-celltype-mpra` needs to trace a non-coding variant to the cell type where it acts.
+   Discovered.
+   https://www.biorxiv.org/content/10.64898/2026.10.19.760026v1
+   ![fig](https://www.biorxiv.org/content/biorxiv/early/2026/10/20/2026.10.19.760026/F1.large.jpg)
+
+3. **Regulation by partition predicts enhancer target selection in mammalian genomes** (first: Valgardson; senior: Wysocka; *bioRxiv*, 23 October 2026).
+   - Asks the question every enhancer-gene map assumes away: given many promoters in reach, **how does an enhancer choose**?
+   - **SPIE-seq** is the right experiment for it — **piggyBac-mediated enhancer insertion** at thousands of positions with an **allele-specific readout**, so the enhancer is the manipulated variable and the locus is the background. **724 clonal lines, 29,954 mapped insertions, 18,440 enhancer-gene pairs** with detected effects.
+   - The central result inverts the usual framing: **genomic context, not enhancer identity, dominates target choice**. Different enhancers at the same position hit nearly the same targets; the *same* enhancer at different positions in one locus hits discordant promoters.
+   - Distance-decay is real but **similar on average across all tested enhancers**, with locus-specific response-curve shapes — so a generic distance prior is a decent null and a poor explanation.
+   - The competitive finding is what kills the independent-promoter model: even at **promoter-dense loci an enhancer activates only one or two** targets, and **promoter skipping increases as competitors accumulate** — incompatible with promoters responding independently on intrinsic features alone. The **Regulation-by-Partition** model formalises this as the enhancer allocating finite output among promoters.
+   - **Why it matters here:** `mpac` and the UKBB CRISPRi screen both interpret a CRE→gene link as a property of the pair. If output is partitioned competitively, the *same* CRE perturbation has a different expected effect depending on what else is in the neighbourhood — a concrete reason some well-powered CRISPRi negatives may be real-but-outcompeted rather than inactive.
+   - ⚠ Figure not yet rendered on bioRxiv (posted 3 days ago); re-check next run.
+   Discovered.
+   https://www.biorxiv.org/content/10.64898/2026.10.23.761042v1
+
+4. **Leveraging genomic deep learning models for the prediction of noncoding variant effects** (first: Kathail; senior: Ioannidis; *Nature Genetics*, 21 October 2026).
+   - A review, and a timely one: it separates the two model families that get conflated in practice — **supervised sequence-to-activity models** (chromatin state, expression from sequence) and **self-supervised genomic language models** — and treats them as different tools with different failure modes.
+   - Most of the value is in the **evaluation taxonomy**: it categorises the kinds of ground truth used to judge variant-effect predictions, which is precisely where the field's claims diverge from its benchmarks.
+   - The honest conclusion is a scoping one — it identifies **the settings in which current models are actually useful**, rather than reporting a global win.
+   - **Why it matters here:** this is the literature backdrop to the ASHG session Steve attended this week ("Promise and Peril of Sequence-to-Function Models"), and to the observation in `#ashg2026` that **personalised-genome RNA correlation with Borzoi came in around r ≈ 0.04** while **high-magnitude predictions remain accurate** — a filter nobody is applying. A review that formalises "useful where?" is directly usable in the `mpac` and GREGoRi framing.
+   Shared `#interesting_papers`.
+   https://www.nature.com/articles/s41588-026-02769-7
+   ![fig](https://media.springernature.com/m685/springer-static/image/art%3A10.1038%2Fs41588-026-02769-7/MediaObjects/41588_2026_2769_Fig1_HTML.png)
+
+5. **Trait Causal Models: from GWAS, perturbations, and omics to predictive models of human biology** (first: Dann; senior: Pritchard; *Zenodo preprint*, 16 October 2026).
+   - A position piece with a specific thesis, not a survey: GWAS is uniquely good at establishing **causal** variant/gene→trait links, but **mechanistic insight at genome scale** does not follow from association, and the gap is structural rather than a matter of sample size.
+   - The argument is that **high-throughput perturbation data and observational omics are complementary in kind** — perturbation supplies directed effects, omics supplies the state space, GWAS supplies the causal anchor — and the next generation of models should be **formal, mechanistic and causal**, linking genes → pathways → cell/tissue biology → traits.
+   - **Why it matters here:** this is the explicit framework for what the lab is already doing piecemeal — MPRA and CRISPRi as the perturbation layer, GWAS/UKBB as the causal anchor. Worth reading as a statement of what the `mpac` and UKBB CRISPRi work is evidence *for*, beyond variant lists.
+   - ⚠ Zenodo deposit carries a PDF only; no extractable figure URL.
+   Shared `#interesting_papers`.
+   https://zenodo.org/records/23426258
+
+6. **PETRO enables robust estimation of on-target perturbation effects in Perturb-seq** (first: Sun; senior: Keleş; *bioRxiv*, 21 October 2026).
+   - Targets an assumption buried in every Perturb-seq pipeline: **multiple guides per target are treated as replicates**, so off-target effects get averaged in rather than averaged out.
+   - **PETRO** recovers the on-target effect while allowing, **per outcome, an unknown minority of guides to have arbitrary off-target effects** — a majority-support estimator rather than a pooling estimator.
+   - The diagnostic finding is the alarming one: **sequence-associated off-target bias persists after pooling cells across guides**, and in one CRISPRa dataset it **nearly doubled after applying a published guide filter** — the standard cleanup step made it worse.
+   - Power is not traded away: in simulation PETRO **nearly matches pooling when there are no off-target effects**, while **pooling stays biased as cell numbers grow** — more cells do not fix a bias, which is the whole point.
+   - The real-data demonstration bites: in cortical Perturb-seq, **most ZNF219 pathway enrichments from pooling rested on a single guide** and did not survive majority-supported aggregation.
+   - **Why it matters here:** directly applicable to the UKBB CRISPRi screen. This week's `#ukbb_crispri` thread was about MOI tails in HepG2, guide-UMI distributions and whether to filter no-guide cells — PETRO is an argument that the **aggregation rule matters as much as the filter**, and a one-guide-driven hit is a specific failure mode worth checking in our own calls.
+   Discovered.
+   https://www.biorxiv.org/content/10.64898/2026.10.15.759256v1
+   ![fig](https://www.biorxiv.org/content/biorxiv/early/2026/10/21/2026.10.15.759256/F1.large.jpg)
+
+7. **Ancient genomes chronicle the history of adaptive evolution in East Asia** (first: Ju; senior: Fu; *bioRxiv*, 23 October 2026).
+   - Uses **2,236 ancient East Asian genomes** — one of the largest such datasets — to do what modern-only scans cannot: **reconstruct allele-frequency trajectories through time and space** rather than inferring selection from present-day haplotype structure.
+   - The design innovation is the covariate: historical **farming intensity** built from **1,220 archaeobotanical sites**, turning "did agriculture drive this?" into a testable environmental association rather than a narrative.
+   - The result pushes timing earlier than the standard story: selection at **FADS1, FUT2 and OCA2 began before the Neolithic** — these are not agricultural adaptations in the simple sense.
+   - The strongest genome-wide signal is **rs1229984 at ADH1B**, with **heterogeneous timing and strength across East Eurasia** and evidence for a **southern origin**; **ADH1B*48His is positively associated with wheat farming**.
+   - **Why it matters here:** this is the time-stratified version of the selection inference `deepsweep2` is building toward, and a useful external benchmark — the heterogeneity across demographic histories is precisely the per-demographic-model variation Tian and Arya spent this week arguing about in the simulation training set.
+   - ⚠ Figure not yet rendered on bioRxiv (posted 3 days ago); re-check next run.
+   Discovered.
+   https://www.biorxiv.org/content/10.64898/2026.10.16.759767v1
+
+8. **Decoding the naked mole-rat genome, telomere to telomere** (first: Sokolowski; senior: Balmus; *bioRxiv*, 16 October 2026).
+   - A **diploid, haplotype-resolved T2T assembly** of the longest-lived rodent, annotated with transcriptomes from **23 tissues** — and paired, importantly, with a long-read assembly of the **Cape dune mole-rat**, a *shorter-lived solitary relative*, so comparisons have a matched control rather than a distant outgroup.
+   - The assembly resolves the parts that defeat short-read references: **satellite-free centromeres, the Y chromosome, and a structurally polymorphic 25-Mb region of chromosome 15**.
+   - Comparative analysis yields specific mechanistic candidates rather than gene-list enrichment: **gene losses that uncouple sperm motility from fertility** (including *Irgc*) and **duplications linked to immunity and reproduction**.
+   - **Why it matters here:** a reference-quality genome plus a matched short-lived sibling species is the substrate the Longevity Consortium (NIA U19) comparative work needs, and the kind of resource `xspecies-modeling` can train on. The eusociality/cancer-resistance phenotypes are only interpretable against exactly this sort of controlled comparison.
+   Shared `#longevity-consortium_p2_internal`.
+   https://www.biorxiv.org/content/10.64898/2026.10.14.758906v1
+   ![fig](https://www.biorxiv.org/content/biorxiv/early/2026/10/16/2026.10.14.758906/F1.large.jpg)
 
 ---
 
