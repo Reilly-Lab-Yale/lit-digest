@@ -7,6 +7,94 @@ Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#immune_mpr
 
 ---
 
+## Week of 2026-11-01
+
+1. **Variant effect predictors are shaping the ClinVar classifications used to train and evaluate them** (first: Tao; senior: Marsh; *bioRxiv*, 27 October 2026).
+   - The circularity everyone suspected now has a measurement. Points-based classification standards let **computational evidence carry enough weight to move a variant out of VUS with little other support** — so predictions help set the classifications that are later used to train, benchmark and calibrate predictions.
+   - The signature is visible in the data, not just in principle: among **rare missense variants from a single major submitter**, likely-benign calls **shifted markedly toward more benign scores** and show a **sharp step change exactly at the calibrated moderate-evidence threshold of BayesDel_noAF**. A discontinuity at the decision boundary is the fingerprint of the threshold being *used*, not of biology.
+   - The contamination is not confined to the tool that was used: the signal appears across **nearly all 52 predictors examined**, including **population-free models unlikely to have been used in classification** — the authors attribute this to **shared evolutionary information** across predictors. You cannot escape it by swapping in a model that wasn't in the room.
+   - The consequence for benchmarking is the sharp one: **temporal holdouts do not fix this**. Splitting by date assumes the later labels are independent of the model; here they are downstream of it, so a "held-out" set is partly the model's own output.
+   - Recommendations are concrete and adoptable: **ClinVar submissions should record the evidence criteria and the computational tools behind each classification in a standardised format**, and the field should lean harder on **classification-independent benchmarks** — i.e. functional assays.
+   - **Why it matters here:** this is the strongest available argument for what `mpac` and the MPRA programme actually sell. If ClinVar labels are partly model-derived, then **experimentally measured allelic effect is the classification-independent ground truth the paper is asking for** — MPRA/saturation-mutagenesis data is not just another feature to feed a predictor, it is the thing that breaks the feedback loop. It also sets a standard we should hold ourselves to when we benchmark our own variant-effect models against ClinVar.
+   Shared `#interesting_papers`.
+   https://www.biorxiv.org/content/10.64898/2026.10.24.761512v1
+   ![fig](https://www.biorxiv.org/content/biorxiv/early/2026/10/27/2026.10.24.761512/F1.large.jpg)
+
+2. **A comprehensive map of the sequence basis of transcription initiation in humans** (first: He; senior: Kundaje; *bioRxiv*, 30 October 2026).
+   - Takes **transcription initiation as the readout** rather than accessibility or expression — a defensible choice, since initiation is what actually distinguishes an active enhancer or promoter from an open but silent one.
+   - Scale is the contribution: an atlas of **efficient, interpretable deep-learning models trained on 200+ initiation-profiling experiments** spanning **all major human organs and many cancer types**.
+   - The claim is two-part and worth separating: the models **predict initiation patterns accurately from local DNA sequence**, *and* they **decode the sequence determinants** of those patterns across cellular contexts — prediction plus interpretation, which is where most sequence-to-function work stops at the first half.
+   - "Local sequence" is the quiet constraint: initiation position and strength being recoverable from nearby sequence bounds how much of promoter choice needs long-range information.
+   - **Why it matters here:** directly relevant to `parm-2026-promoter-grammar` and to `malinois-coda`. Initiation-site prediction is a more mechanistically specific target than bulk activity, and a cross-organ interpretable model is exactly the kind of prior that could nominate designed-promoter variants for synthetic-CRE work. Also a natural external benchmark for the context-specific sequence-to-expression models proposed in **Aim 1E of the new IGVF Interaction Center aims**.
+   - ⚠ Figure not yet rendered on bioRxiv (posted 3 days ago); re-check next run.
+   Discovered.
+   https://www.biorxiv.org/content/10.64898/2026.10.29.762743v1
+
+3. **ChAI-Net learns a regulatory code for chromatin co-accessibility** (first: Lee; senior: Pollard; *bioRxiv*, 31 October 2026).
+   - Starts from a measurement most accessibility work throws away: **single-molecule long-read footprinting** gives near-nucleotide-resolution chromatin fibre structure on **individual molecules**, so TF-binding coordination and nucleosome positioning are visible instead of averaged out.
+   - The quantity modelled is the right one — **how often a pair of positions is simultaneously accessible on the same molecule** — and **ChAI-Net predicts these locus-specific co-accessibility maps from DNA sequence alone** in mouse ES cells.
+   - The payoff is the part that bulk methods structurally cannot deliver: the model learns **distinct motif combinations underlying co-accessibility within enhancers, promoters and CTCF sites**, and **many of these motifs are missed when modelling average accessibility** — i.e. they matter specifically for *coordinated* binding, not for whether the region is open.
+   - The learned grammar is explicitly syntactic: **motif orientation, spacing, positioning and co-occurrence** all drive co-accessibility, recovered by interpretation and in-silico perturbation rather than asserted.
+   - **Why it matters here:** cooperativity is the mechanism `malinois-coda` has to exploit to design cell-type-specific elements, and averaging is precisely how most training data hides it. For `brain-celltype-mpra`, it also suggests that two variants in the same element may act non-independently through co-binding — which is **the Aim 2 (co-occurring, non-additive) hypothesis of the IGVF Interaction Center aims, stated at the molecular level.**
+   - ⚠ Figure not yet rendered on bioRxiv (posted 2 days ago); re-check next run.
+   Discovered.
+   https://www.biorxiv.org/content/10.64898/2026.10.29.762938v1
+
+4. **SMFnet reveals principles of combinatorial transcription factor assembly** (first: Schwämmle; senior: Krebs; *bioRxiv*, 31 October 2026).
+   - Names the modelling failure directly: a single regulatory sequence supports **multiple configurations of TF and nucleosome occupancy**, and predictive accessibility models **collapse these distinct molecular states into a population average** — so the thing that explains opening is averaged away before modelling starts.
+   - The method is generative rather than regressive: **SMFnet is a diffusion model that predicts the full distribution of single-molecule accessibility profiles from sequence**, with a companion tool, **PRISM**, that attributes individual molecular states to sequence features.
+   - The validation is the strong part — **experimentally perturbing the implicated motifs redistributes the molecular states as SMFnet predicted**, which is what licenses reading those states as genuine TF-dependent configurations rather than model artefacts.
+   - In-silico motif screens then yield mechanism: **individual TFs have distinct opening signatures**, differing in **accessible-region width and nucleosome-positioning precision even at matched accessibility levels** — so equal "openness" can mean quite different molecular events.
+   - Combinations are **partner- and spacing-dependent**, the same syntax conclusion ChAI-Net reaches from a different direction. Two independent single-molecule papers landing on spacing-dependent cooperativity in one week is a real signal.
+   - **Why it matters here:** a generative distribution-over-states model is a better match to what an MPRA actually measures (a population of molecules) than a point prediction is. Note **Kundaje is a co-author here and senior on entry 2** — worth watching as a coordinated line of work.
+   - ⚠ Figure not yet rendered on bioRxiv (posted 2 days ago); re-check next run.
+   Discovered.
+   https://www.biorxiv.org/content/10.64898/2026.10.30.762954v1
+
+5. **Scooby-2: fine-tuning AlphaGenome for single-cell genomic track prediction** (first: Hingerl; senior: Gagneur; *bioRxiv*, 29 October 2026).
+   - Identifies AlphaGenome's practical ceiling: it outperforms Borzoi on most track and variant-effect benchmarks but still **predicts tracks only for predefined, mostly bulk-derived cell types and tissues**.
+   - The fix is deliberately modest and reusable: **AlphaGenome plus a cell-specific decoder**, trained with **parameter-efficient fine-tuning**, to predict **single-cell RNA-seq coverage and chromatin accessibility** from sequence — shipped with implementation, training pipeline and inference scripts.
+   - Gains are real but incremental on expression: **Pearson 0.56 vs Scooby's 0.53** for cell-type-specific expression differences on the NeurIPS bone-marrow dataset.
+   - The variant result is the one that matters more: with the distilled AlphaGenome backbone, **concordance with fine-mapped eQTLs from OneK1K rose from 0.37 to 0.47 Spearman** — and the authors note this is **consistent with AlphaGenome's own margin over Borzoi**, i.e. the backbone improvement carries through to single-cell variant effects rather than being lost in the decoder.
+   - **Why it matters here:** `xspecies-modeling` and `brain-celltype-mpra` both need cell-type-resolved variant effects, and this is a cheap, published recipe for getting them out of a frontier model without retraining it. Read alongside entry 6 — one paper shows the backbone transfers, the other shows where it still fails.
+   - ⚠ Figure not yet rendered on bioRxiv (posted 4 days ago); re-check next run.
+   Discovered.
+   https://www.biorxiv.org/content/10.64898/2026.10.28.762238v1
+
+6. **AlphaGenome Enhances Personal Gene Expression Prediction but Retains Key Limitations** (first: Kashyap; senior: Shen; *bioRxiv* v3, 29 October 2026).
+   - Tests sequence-to-function models on the task they have been most criticised for — **predicting expression differences between individuals**, not between genes or tissues.
+   - The comparison is carefully powered: across **1,000 genes and 11,471 eligible gene–tissue pairs**, AlphaGenome significantly beats Enformer for **3,103 pairs** against Enformer's **828** — a **win ratio of 3.75**, backed by a **global permutation test (P = 2.0e-4)** and a **median correlation difference of only 0.046**.
+   - That gap between a lopsided win ratio and a tiny effect size is the honest result: **AlphaGenome is reliably better and still barely better**.
+   - The deflating comparison is the important one: **pretrained AlphaGenome substantially underperforms Elastic Net and Random Forest trained on individual-level data**. A frontier sequence model loses to ordinary regression when the regression gets to see real people.
+   - **Why it matters here:** a useful corrective to read against the IGVF aims. If pretrained models trail simple models trained on individual-level data at baseline, then **predicting *interaction* effects — environment, haplotype, genetic background — is further out of reach still**, which strengthens rather than weakens the case for measuring them by MPRA. Pair with entry 5 as this week's two-sided read on AlphaGenome.
+   - ⚠ Figure not yet rendered on bioRxiv for this version (v3 posted 4 days ago); re-check next run.
+   Discovered.
+   https://www.biorxiv.org/content/10.1101/2025.08.05.668750v3
+
+7. **Genetic variants within silencer elements shape human blood cell phenotype diversity** (first: Tan; senior: Pang; *bioRxiv* v2, 27 October 2026).
+   - Goes after the half of the regulatory genome that non-coding variant work routinely skips: **silencers**, whose variant effects are poorly defined compared with enhancers.
+   - The assay is an MPRA-shaped one — **ReSE, a high-throughput silencer screen** — applied to sequences spanning **14,720 non-coding variants from fine-mapped loci for 15 blood-cell traits**.
+   - Hit rate and direction are both reported: in K562, **805 variants with differential silencer activity**, split **425 loss-of-silencer-function and 380 gain-of-silencer-function** — gains are nearly as common as losses, which argues against treating silencer variants as a purely disruptive class.
+   - The validation ladder is the right one and goes further than most: **luciferase confirms allele-dependent repression**, **endogenous editing changes nearby gene expression**, and the **rs2857078 alternative allele downregulates globin expression and reduces mature erythrocyte markers on erythroid differentiation** — reporter → locus → cellular phenotype.
+   - The prioritisation result is the one to steal: integrating **single-cell haematopoietic chromatin accessibility with evolutionary conservation** recovered functional silencer variants **despite low fine-mapping PIPs** — statistical fine-mapping was systematically missing them.
+   - **Why it matters here:** direct methodological sibling to `mpac`. The low-PIP finding is a concrete argument for not using PIP as the gate on an MPRA panel, which bears on how the **IGVF Aim 1/2 variant panels get nominated** — and silencers are an obvious gap in the lab's own element libraries.
+   Discovered.
+   https://www.biorxiv.org/content/10.1101/2025.01.13.632723v2
+   ![fig](https://www.biorxiv.org/content/biorxiv/early/2026/10/27/2025.01.13.632723/F1.large.jpg)
+
+8. **Robustness of the inference of the distribution of fitness effects to selective sweeps** (first: Wade; senior: Lohmueller; *bioRxiv*, 27 October 2026).
+   - Audits an assumption built into every DFE inference: the standard two-step recipe **fits a demographic model to putatively neutral sites, then infers the DFE from selected sites conditional on it**, assuming **sites are independent** and that **population-size change affects neutral and selected sites equally**. Sweeps violate both, because hitchhiking distorts the SFS and may distort it differently at the two site classes.
+   - The test is a simulation audit of **fitdadi** against a **known** DFE, under varying sweep conditions and with a flexible demographic model — so failure is measurable rather than argued.
+   - The headline is reassuring and specific: when SFS are sampled **immediately after fixation of a beneficial mutation**, the **demographic model absorbs the sweep as a population expansion** and the DFE is still recovered reasonably well. The nuisance parameter does the work.
+   - The failure modes are named: performance **declines at lower recombination rates** and **when using the unfolded SFS**, leading to **overestimation of the strength of purifying selection** — a directional bias, which is worse than noise.
+   - Under **recurrent sweeps at rates consistent with human polymorphism and divergence**, the demographic model again captures the distortion.
+   - **Why it matters here:** lands in the middle of this week's `deepsweep2` argument. The lab spent the week establishing that empirical-vs-simulated density differences are properties of the **demographic models** (Ne, recombination rate) rather than bugs — and this paper says a flexible demographic model is exactly what absorbs sweep distortion, **except at low recombination and with unfolded spectra**. Those two caveats are worth checking directly against the per-demographic-model component-score distributions Steve asked for before training.
+   Discovered.
+   https://www.biorxiv.org/content/10.64898/2026.10.25.761705v1
+   ![fig](https://www.biorxiv.org/content/biorxiv/early/2026/10/27/2026.10.25.761705/F1.large.jpg)
+
+---
+
 ## Week of 2026-10-25
 
 1. **Reconstructing human gene regulatory evolution using deep learning** (first: Yamada; senior: Kaessmann; *bioRxiv*, 23 October 2026).
@@ -17,9 +105,9 @@ Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#immune_mpr
    - The causal claim is tested, not asserted: genes linked to more gains are **more likely to be upregulated in humans**, and **in silico reversion to ancestral alleles** traces individual upregulations back to **single substitutions that create TF binding motifs**.
    - The archaic comparison is the sharpest result: against Neandertal and Denisovan genomes, **nearly all gains now fixed in humans predate the archaic split** — yet **a few modern-human-specific gains contribute disproportionately** to upregulation. Most of "human" regulatory evolution is actually hominin regulatory evolution.
    - **Why it matters here:** this is the paper `archaic-introgression` and `xspecies-modeling` would have written with a model instead of an assay, and it is a direct precedent for using a sequence-to-function model as the primary evidence rather than a prioritisation step. It also sets up the obvious MPRA test — the in-silico reversions that create a motif are exactly the constructs we can build and measure.
-   - ⚠ Figure not yet rendered on bioRxiv (posted 3 days ago); re-check next run.
    Shared `#zoonomia-p`.
    https://www.biorxiv.org/content/10.64898/2026.10.22.760916v1
+   ![fig](https://www.biorxiv.org/content/biorxiv/early/2026/10/23/2026.10.22.760916/F1.large.jpg)
 
 2. **Predicting cell-state-specific gene regulation from DNA across species** (first: Liu; senior: Greenberg; *bioRxiv*, 20 October 2026).
    - States the field's split cleanly: **sequence-to-function models read DNA but treat cell state as a fixed categorical label**, while single-cell foundation models represent cell state but never see sequence. Neither can answer "what does this sequence do in *this* cell right now."
@@ -39,9 +127,9 @@ Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#immune_mpr
    - Distance-decay is real but **similar on average across all tested enhancers**, with locus-specific response-curve shapes — so a generic distance prior is a decent null and a poor explanation.
    - The competitive finding is what kills the independent-promoter model: even at **promoter-dense loci an enhancer activates only one or two** targets, and **promoter skipping increases as competitors accumulate** — incompatible with promoters responding independently on intrinsic features alone. The **Regulation-by-Partition** model formalises this as the enhancer allocating finite output among promoters.
    - **Why it matters here:** `mpac` and the UKBB CRISPRi screen both interpret a CRE→gene link as a property of the pair. If output is partitioned competitively, the *same* CRE perturbation has a different expected effect depending on what else is in the neighbourhood — a concrete reason some well-powered CRISPRi negatives may be real-but-outcompeted rather than inactive.
-   - ⚠ Figure not yet rendered on bioRxiv (posted 3 days ago); re-check next run.
    Discovered.
    https://www.biorxiv.org/content/10.64898/2026.10.23.761042v1
+   ![fig](https://www.biorxiv.org/content/biorxiv/early/2026/10/23/2026.10.23.761042/F1.large.jpg)
 
 4. **Leveraging genomic deep learning models for the prediction of noncoding variant effects** (first: Kathail; senior: Ioannidis; *Nature Genetics*, 21 October 2026).
    - A review, and a timely one: it separates the two model families that get conflated in practice — **supervised sequence-to-activity models** (chromatin state, expression from sequence) and **self-supervised genomic language models** — and treats them as different tools with different failure modes.
@@ -77,7 +165,6 @@ Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#immune_mpr
    - The result pushes timing earlier than the standard story: selection at **FADS1, FUT2 and OCA2 began before the Neolithic** — these are not agricultural adaptations in the simple sense.
    - The strongest genome-wide signal is **rs1229984 at ADH1B**, with **heterogeneous timing and strength across East Eurasia** and evidence for a **southern origin**; **ADH1B*48His is positively associated with wheat farming**.
    - **Why it matters here:** this is the time-stratified version of the selection inference `deepsweep2` is building toward, and a useful external benchmark — the heterogeneity across demographic histories is precisely the per-demographic-model variation Tian and Arya spent this week arguing about in the simulation training set.
-   - ⚠ Figure not yet rendered on bioRxiv (posted 3 days ago); re-check next run.
    Discovered.
    https://www.biorxiv.org/content/10.64898/2026.10.16.759767v1
 
@@ -88,6 +175,7 @@ Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#immune_mpr
    - **Why it matters here:** a reference-quality genome plus a matched short-lived sibling species is the substrate the Longevity Consortium (NIA U19) comparative work needs, and the kind of resource `xspecies-modeling` can train on. The eusociality/cancer-resistance phenotypes are only interpretable against exactly this sort of controlled comparison.
    Shared `#longevity-consortium_p2_internal`.
    https://www.biorxiv.org/content/10.64898/2026.10.14.758906v1
+   ![fig](https://www.biorxiv.org/content/biorxiv/early/2026/10/16/2026.10.14.758906/F1.large.jpg)
    ![fig](https://www.biorxiv.org/content/biorxiv/early/2026/10/16/2026.10.14.758906/F1.large.jpg)
 
 ---
@@ -569,6 +657,7 @@ Sourced from: `#interesting_papers` `#interesting-papers_evolution` `#immune_mpr
 
 
 ---
+
 ## 🎉 Hot off the press — from the Reilly Lab!
 
 1. **The Encyclopedia of DNA Elements** (first: ENCODE Project Consortium; senior: T. Reddy; *bioRxiv* 2026.07.06.731365, July 8 2026).
